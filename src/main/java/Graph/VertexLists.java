@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class VertexLists {
 
-    private final HashMap<Vertex, ArrayList<Vertex>> map;
+    private final Map<Vertex, ArrayList<Vertex>> map;
 
     public VertexLists(HashMap<Vertex, ArrayList<Vertex>> map) {
         this.map = map;
