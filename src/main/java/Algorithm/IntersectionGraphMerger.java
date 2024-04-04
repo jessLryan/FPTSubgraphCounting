@@ -8,13 +8,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-public class IntersectionGraphUtils {
+public class IntersectionGraphMerger {
     private final IntersectionGraph graph1;
     private final IntersectionGraph graph2;
 
-    public IntersectionGraphUtils(IntersectionGraph graph1, IntersectionGraph graph2) {
+    public IntersectionGraphMerger(IntersectionGraph graph1, IntersectionGraph graph2) {
         //graph1 should have fewest vertices for efficiency
         if (graph1.order() < graph2.order()) {
             this.graph1 = graph1;
@@ -33,9 +32,7 @@ public class IntersectionGraphUtils {
         return mergeVerticesRecursively(mergedVertexMap, graph1.getVertices(), graph2.getVertices());
     }
 
-    private List<IntersectionGraph> mergeVerticesRecursively(Map<Vertex, Vertex> mergedVertexMap,
-                                                             List<Vertex> unmergedVerticesGraph1,
-                                                             List<Vertex> unmergedVerticesGraph2) {
+    private List<IntersectionGraph> mergeVerticesRecursively(Map<Vertex, Vertex> mergedVertexMap, List<Vertex> unmergedVerticesGraph1, List<Vertex> unmergedVerticesGraph2) {
         //if unmergedVerticesGraph1 empty, we are done - check at least one pair are merged
         //and construct merged graph from map
         if (unmergedVerticesGraph1.isEmpty() && !mergedVertexMap.values().isEmpty()) {
