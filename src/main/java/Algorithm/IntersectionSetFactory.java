@@ -24,13 +24,13 @@ public class IntersectionSetFactory {
             for (int graph2Index = graph1Index + 1; graph2Index < size; graph2Index++) {
                 //get all contained intersection sets in which this
                 // pair of graphs are merged together
-                intersectionSet.addContainedIntersectionSets(someMethod(graphs, graph1Index, graph2Index));
+                intersectionSet.addContainedIntersectionSets(createContainedIntersectionSetsWithGraphPairMerged(graphs, graph1Index, graph2Index));
             }
 
         }
     }
 
-    private static Set<IntersectionSet> someMethod(List<IntersectionGraph> graphs, int graph1Index, int graph2Index) {
+    private static Set<IntersectionSet> createContainedIntersectionSetsWithGraphPairMerged(List<IntersectionGraph> graphs, int graph1Index, int graph2Index) {
         Set<IntersectionSet> containedSets = new TreeSet<>();
 
         IntersectionGraph graph1 = graphs.get(graph1Index);

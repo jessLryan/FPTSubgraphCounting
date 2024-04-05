@@ -17,6 +17,10 @@ public class Graph {
         this.vertices.sort((o1, o2) -> Integer.compare(o2.degree(), o1.degree()));
     }
 
+    public Vertex getVertexAtIndex(int index) {
+        return vertices.get(index);
+    }
+
     public List<Vertex> getVertices() {
         return vertices;
     }
