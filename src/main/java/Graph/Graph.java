@@ -150,4 +150,19 @@ public class Graph {
         return new ArrayList<>(IntStream.range(0, numVertices).mapToObj(i -> new Vertex()).toList());
     }
 
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        for (int i=0;i<order();i++) {
+            Vertex vertex = vertices.get(i);
+                string.append("vertex v_").append(i).append("\n");
+            for (int j=i+1;j<order();j++) {
+                Vertex neighbour = vertices.get(j);
+                if (vertex.isAdjacentTo(neighbour)) {
+                    string.append("v_").append(i).append(" adjacent to v_").append(j).append("\n");
+                }
+            }
+        }
+        return string.toString();
+    }
 }

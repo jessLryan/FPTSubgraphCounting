@@ -11,10 +11,10 @@ import java.util.TreeSet;
 
 public class IntersectionSetFactory {
 
-    public static SortedSet<IntersectionSet> createIntersectionSetsOfGraphs(List<IntersectionGraph> graphs) {
+    public static IntersectionSet createIntersectionSetOfGraphs(List<IntersectionGraph> graphs) {
         IntersectionSet initialIntersectionSet = new IntersectionSet(graphs);
         createContainedIntersectionSetsOf(initialIntersectionSet);
-        return initialIntersectionSet.getContainedIntersectionSets();
+        return initialIntersectionSet;
     }
 
     private static void createContainedIntersectionSetsOf(IntersectionSet intersectionSet) {

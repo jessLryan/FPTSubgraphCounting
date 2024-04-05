@@ -20,24 +20,29 @@ import static org.junit.Assert.assertEquals;
 
 public class MainTest {
 
-    List<Graph> hostGraphs = createRandomHostGraphs(15, 5);
+
     String resourcesDirectoryPath = "src/test/resources";
 
     @Test
     public void TestRandomHostGraphsPatternGraphsOrder1() {
-        ArrayList<Graph> patterns = createAllPatternGraphsWithOrder(1);
-        for (Graph host : hostGraphs) {
-            for (Graph pattern : patterns) {
-                ParameterValueOptimiser parameterOptimiser = new ParameterValueOptimiser(pattern, host);
-                int numHighDegVertices = parameterOptimiser.getNumHighDegVertices();
-                List<Vertex> highestDegVertices = host.getHighestDegVertices(numHighDegVertices);
-                LabelledSubgraphCountingAlgorithm FPTAlg = new LabelledSubgraphCountingAlgorithm(host, pattern, highestDegVertices);
-                int FPTCount = FPTAlg.run();
+        for (int i = 1; i < 4; i++) {
+            List<Graph> hostGraphs = createRandomHostGraphs(i, 50, 15);
 
-                VertexLists mapLists = new VertexLists(host, pattern);
-                int bruteForceCount = BruteForceLabelledSubgraphCountingAlgorithm.countLabelledCopiesWithLists(pattern, mapLists);
 
-                assertEquals(FPTCount, bruteForceCount);
+            ArrayList<Graph> patterns = createAllPatternGraphsWithOrder(i);
+            for (Graph host : hostGraphs) {
+                for (Graph pattern : patterns) {
+                    ParameterValueOptimiser parameterOptimiser = new ParameterValueOptimiser(pattern, host);
+                    int numHighDegVertices = parameterOptimiser.getNumHighDegVertices();
+                    List<Vertex> highestDegVertices = host.getHighestDegVertices(numHighDegVertices);
+                    LabelledSubgraphCountingAlgorithm FPTAlg = new LabelledSubgraphCountingAlgorithm(host, pattern, highestDegVertices);
+                    int FPTCount = FPTAlg.run();
+
+                    VertexLists mapLists = new VertexLists(host, pattern);
+                    int bruteForceCount = BruteForceLabelledSubgraphCountingAlgorithm.countLabelledCopiesWithLists(pattern, mapLists);
+
+                    assertEquals(FPTCount, bruteForceCount);
+                }
             }
         }
     }
@@ -45,19 +50,19 @@ public class MainTest {
 
     public ArrayList<Graph> createAllPatternGraphsWithOrder(int order) {
         ArrayList<Graph> graphs = new ArrayList<>();
-        File folder = new File(resourcesDirectoryPath+"/pattern_graphs/"+order);
-            for (File patternFile: Objects.requireNonNull(folder.listFiles())) {
-                Graph pattern = GraphFileReader.readToGraph(patternFile.getPath());
-                graphs.add(pattern);
-            }
+        File folder = new File(resourcesDirectoryPath + "/pattern_graphs/" + order);
+        for (File patternFile : Objects.requireNonNull(folder.listFiles())) {
+            Graph pattern = GraphFileReader.readToGraph(patternFile.getPath());
+            graphs.add(pattern);
+        }
         return graphs;
     }
 
-    private List<Graph> createRandomHostGraphs(int maxOrder, int amountWanted) {
+    private List<Graph> createRandomHostGraphs(int minOrder, int maxOrder, int amountWanted) {
         List<Graph> hostGraphList = new ArrayList<>();
-        for (int i=0;i<amountWanted;i++) {
-            int randomOrder = (int) (Math.random()*maxOrder);
-            hostGraphList.add(createRandomHostGraphWithOrder(randomOrder));
+        for (int i = 0; i < amountWanted; i++) {
+            int randomOrder = (int) (Math.random() * maxOrder);
+            hostGraphList.add(createRandomHostGraphWithOrder(Math.max(minOrder, randomOrder)));
         }
         return hostGraphList;
     }
@@ -66,9 +71,9 @@ public class MainTest {
     private Graph createRandomHostGraphWithOrder(int order) {
         Random random = new Random();
         ArrayList<Vertex> vertices = createVertices(order);
-        for (int vertex1Index =0;vertex1Index<order;vertex1Index++) {
+        for (int vertex1Index = 0; vertex1Index < order; vertex1Index++) {
             Vertex vertex1 = vertices.get(vertex1Index);
-            for (int vertexIndex2=vertex1Index+1;vertexIndex2<order;vertexIndex2++) {
+            for (int vertexIndex2 = vertex1Index + 1; vertexIndex2 < order; vertexIndex2++) {
                 boolean isAdjacent = random.nextBoolean();
                 if (isAdjacent) {
                     Vertex vertex2 = vertices.get(vertexIndex2);

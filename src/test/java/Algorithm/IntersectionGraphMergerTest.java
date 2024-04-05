@@ -112,7 +112,6 @@ class IntersectionGraphMergerTest {
         return new IntersectionGraph(vertices, correspondence);
     }
 
-
     private IntersectionGraph createK4Graph() {
         ArrayList<Vertex> vertices = new ArrayList<>();
         HashMap<Vertex, HashSet<Vertex>> correspondence = new HashMap<>();

@@ -4,7 +4,6 @@ import Graph.VertexLists;
 import Graph.IntersectionSet;
 import Graph.IntersectionGraph;
 import Graph.Vertex;
-import Algorithm.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +24,7 @@ public class IntersectionSetCounter {
     private static int countAllCopiesOfIntersectionSet(IntersectionSet intersectionSet, VertexLists mapLists) {
         int count = 1;
         for (IntersectionGraph graph : intersectionSet.getGraphs()) {
-            VertexLists graphMapList = createMapListsForGraph(graph, mapLists);
+            VertexLists graphMapList = createVertexListsForGraph(graph, mapLists);
             int graphCount = BruteForceLabelledSubgraphCountingAlgorithm.countLabelledCopiesWithLists(graph, graphMapList);
             if (graphCount == 0) {
                 return 0;
@@ -35,7 +34,7 @@ public class IntersectionSetCounter {
         return count;
     }
 
-    private static VertexLists createMapListsForGraph(IntersectionGraph graph, VertexLists map) {
+    private static VertexLists createVertexListsForGraph(IntersectionGraph graph, VertexLists map) {
         Map<Vertex, HashSet<Vertex>> correspondence = graph.getCorrespondence();
         HashMap<Vertex, ArrayList<Vertex>> newmap = new HashMap<>();
         for (Vertex vertex : graph.getVertices()) {

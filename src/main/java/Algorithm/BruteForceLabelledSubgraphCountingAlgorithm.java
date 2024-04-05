@@ -10,6 +10,10 @@ public class BruteForceLabelledSubgraphCountingAlgorithm {
 
     public static int countLabelledCopiesWithLists(Graph pattern, VertexLists mapLists) {
         List<Vertex> patternVertices = pattern.getVertices();
+        if (patternVertices.size()==1) {
+            Vertex vertex = patternVertices.getFirst();
+            return mapLists.getListOfVertex(vertex).size();
+        }
         return countEmbeddingsRecursive(patternVertices, mapLists, 0);
     }
 
