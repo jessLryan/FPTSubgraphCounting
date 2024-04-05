@@ -65,7 +65,7 @@ public class MainTest {
 
     private Graph createRandomHostGraphWithOrder(int order) {
         Random random = new Random();
-        List<Vertex> vertices = createVertices(order);
+        ArrayList<Vertex> vertices = createVertices(order);
         for (int vertex1Index =0;vertex1Index<order;vertex1Index++) {
             Vertex vertex1 = vertices.get(vertex1Index);
             for (int vertexIndex2=vertex1Index+1;vertexIndex2<order;vertexIndex2++) {
@@ -80,8 +80,8 @@ public class MainTest {
         return new Graph(vertices);
     }
 
-    private List<Vertex> createVertices(int numVertices) {
-        return IntStream.range(0, numVertices).mapToObj(i -> new Vertex()).toList();
+    private ArrayList<Vertex> createVertices(int numVertices) {
+        return new ArrayList<>(IntStream.range(0, numVertices).mapToObj(i -> new Vertex()).toList());
     }
 
 

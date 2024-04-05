@@ -2,6 +2,7 @@ package Graph;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -78,7 +79,7 @@ class IntersectionGraphTest {
     }
 
     private IntersectionGraph createSmallerGraph() {
-        List<Vertex> patternVertices = createVertices(2);
+        ArrayList<Vertex> patternVertices = createVertices(2);
         Vertex firstPatternVertex = patternVertices.getFirst();
         Vertex lastPatternVertex = patternVertices.getLast();
         firstPatternVertex.addNeighbour(lastPatternVertex);
@@ -92,7 +93,7 @@ class IntersectionGraphTest {
     }
 
     private IntersectionGraph createLargerGraph() {
-        List<Vertex> patternVertices = createVertices(3);
+        ArrayList<Vertex> patternVertices = createVertices(3);
 
         HashMap<Vertex, HashSet<Vertex>> correspondence = new HashMap<>();
         correspondence.put(patternVertices.getFirst(), new HashSet<>(Set.of(HOST_VERTICES.getFirst())));
@@ -102,7 +103,7 @@ class IntersectionGraphTest {
         return new IntersectionGraph(patternVertices, correspondence);
     }
 
-    private List<Vertex> createVertices(int numVertices) {
-        return IntStream.range(0, numVertices).mapToObj(i -> new Vertex()).toList();
+    private ArrayList<Vertex> createVertices(int numVertices) {
+        return new ArrayList<>(IntStream.range(0, numVertices).mapToObj(i -> new Vertex()).toList());
     }
 }

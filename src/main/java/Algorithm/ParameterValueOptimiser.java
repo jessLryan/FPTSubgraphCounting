@@ -2,7 +2,9 @@ package Algorithm;
 
 import Graph.Graph;
 
-//calculate optimal values of parameters:
+import java.math.BigInteger;
+
+//calculate optimal values of FPT parameters:
 //- number of vertices considered the "high degree vertices" in the host graph
 //- maximum degree of the remaining vertices in the host
 //optimal values calculated using the theoretical runtime function of the algorithm
@@ -16,27 +18,27 @@ public class ParameterValueOptimiser {
         int hostMaxDeg = host.maxDeg();
         maxDegRemainingVertices = hostMaxDeg;
 
-        long functionValue = longPower(hostMaxDeg, patternOrder);
+        //initial function value is the runtime of simple brute-force approach
+        //i.e. no vertices are marked as "high degree vertices"
+        BigInteger functionValue = BigInteger.valueOf(hostMaxDeg).pow(patternOrder);
+        //note that there is no value in marking more than patternOrder
+        //vertices as high degree vertices in host graph as this will
+        //not change the runtime (all pattern vertices are already to be
+        //mapped to the high degree set)
         for (int numVerticesRemoved = 1; numVerticesRemoved <= patternOrder; numVerticesRemoved++) {
             int maxDegRemaining = host.maxDegRemaining(numVerticesRemoved);
 
-            long term1 = longPower(numVerticesRemoved * patternOrder, numVerticesRemoved);
-            long term2 = longPower(maxDegRemaining, patternOrder);
-            long newFunctionValue = term1 * term2;
+            BigInteger term1 = BigInteger.valueOf(numVerticesRemoved * patternOrder).pow(numVerticesRemoved+1);
+            BigInteger term2 = BigInteger.valueOf(maxDegRemaining).pow(patternOrder);
+            if (term1.compareTo(functionValue)<0&&term2.compareTo(functionValue)<0) {
+                BigInteger newFunctionValue = term1.multiply(term2);
 
-            if (newFunctionValue < functionValue) {
-                numHighDegVertices = numVerticesRemoved;
-                maxDegRemainingVertices = maxDegRemaining;
+                if (newFunctionValue.compareTo(functionValue) < 1) {
+                    numHighDegVertices = numVerticesRemoved;
+                    maxDegRemainingVertices = maxDegRemaining;
+                }
             }
         }
-    }
-
-    private static long longPower(int base, int exp) {
-        long result = base;
-        for (int power = 1; power < exp; power++) {
-            result = result * base;
-        }
-        return result;
     }
 
     public int getNumHighDegVertices() {

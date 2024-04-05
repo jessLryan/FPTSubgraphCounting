@@ -165,7 +165,7 @@ class IntersectionSetTest {
     }
 
     private IntersectionGraph createSmallerGraph() {
-        List<Vertex> patternVertices = createVertices(2);
+        ArrayList<Vertex> patternVertices = createVertices(2);
 
         HashMap<Vertex, HashSet<Vertex>> correspondence = new HashMap<>();
         correspondence.put(patternVertices.getFirst(), new HashSet<>(Set.of(HOST_VERTICES.getFirst())));
@@ -175,7 +175,7 @@ class IntersectionSetTest {
     }
 
     private IntersectionGraph createLargerGraph() {
-        List<Vertex> patternVertices = createVertices(3);
+        ArrayList<Vertex> patternVertices = createVertices(3);
         Vertex firstPatternVertex = patternVertices.getFirst();
         Vertex lastPatternVertex = patternVertices.getLast();
         firstPatternVertex.addNeighbour(lastPatternVertex);
@@ -189,7 +189,7 @@ class IntersectionSetTest {
         return new IntersectionGraph(patternVertices, correspondence);
     }
 
-    private List<Vertex> createVertices(int numVertices) {
-        return IntStream.range(0, numVertices).mapToObj(i -> new Vertex()).toList();
+    private ArrayList<Vertex> createVertices(int numVertices) {
+        return new ArrayList<>(IntStream.range(0, numVertices).mapToObj(i -> new Vertex()).toList());
     }
 }

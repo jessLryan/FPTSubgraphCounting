@@ -1,6 +1,7 @@
 package Graph;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -10,11 +11,37 @@ import java.util.stream.IntStream;
 
 public class Graph {
     //vertices ordered in descending order of degree
-    protected final List<Vertex> vertices;
+    protected List<Vertex> vertices;
 
-    public Graph(List<Vertex> vertexList) {
-        this.vertices = new ArrayList<>(vertexList);
-        this.vertices.sort((o1, o2) -> Integer.compare(o2.degree(), o1.degree()));
+    public Graph(ArrayList<Vertex> vertexList) {
+        vertexList.sort((o1, o2) -> Integer.compare(o2.degree(), o1.degree()));
+        this.vertices = vertexList;
+    }
+
+    //note that the following method will fail if the graph
+    //is not connected
+    public void orderVerticesEachPrecededByNeighbour() {
+        List<Vertex> verticesCopy = new ArrayList<>();
+        Vertex firstVertex = vertices.removeFirst();
+        verticesCopy.add(firstVertex);
+        int numVerticesLeftToAdd = vertices.size();
+        for (int i=0; i<numVerticesLeftToAdd;i++) {
+            Vertex vertex = getNextVertex(verticesCopy);
+            verticesCopy.add(vertex);
+            vertices.remove(vertex);
+        }
+        vertices = verticesCopy;
+    }
+
+    private Vertex getNextVertex(List<Vertex> verticesCopy) {
+        for (Vertex nextVertex: vertices) {
+            for (Vertex possibleNeighbour : verticesCopy) {
+                if (nextVertex.isAdjacentTo(possibleNeighbour)) {
+                    return nextVertex;
+                }
+            }
+        }
+        throw new IllegalArgumentException("vertex ordering not possible");
     }
 
     public Vertex getVertexAtIndex(int index) {
@@ -48,7 +75,16 @@ public class Graph {
 
     //return max degree of graph after k highest vertices are removed
     public int maxDegRemaining(int k) {
-        return vertices.get(k).degree();
+        if (k==0) {
+            return maxDeg();
+        }
+        List<Vertex> remainingVertices = vertices.subList(k,order());
+        int remainingDeg = 0;
+        for (Vertex remainingVertex: remainingVertices) {
+            List<Vertex> remainingNeighbours = remainingVertex.neighbours().stream().filter(remainingVertices::contains).toList();
+            remainingDeg = Math.max(remainingDeg, remainingNeighbours.size());
+        }
+        return remainingDeg;
     }
 
     public List<IntersectionGraph> getConnectedComponentsWithoutVertices(List<Vertex> verticesToExclude) {
@@ -61,7 +97,7 @@ public class Graph {
             Vertex vertex = remainingVerticesCopy.getFirst();
             Set<Vertex> componentVertices = new HashSet<>();
             getReachableVertices(vertex, componentVertices);
-            List<Vertex> componentVerticesList = componentVertices.stream().toList();
+            ArrayList<Vertex> componentVerticesList = new ArrayList<>(componentVertices.stream().toList());
             HashMap<Vertex, HashSet<Vertex>> componentCorrespondence = new HashMap<>();
             for (Vertex componentVertex : componentVerticesList) {
                 componentCorrespondence.put(componentVertex, correspondence.get(componentVertex));

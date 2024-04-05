@@ -41,7 +41,7 @@ class BruteForceLabelledSubgraphCountingAlgorithmTest {
         vertex3.addNeighbour(vertex1);
         vertex3.addNeighbour(vertex2);
 
-        List<Vertex> vertices = new ArrayList<>(List.of(vertex1, vertex2, vertex3));
+        ArrayList<Vertex> vertices = new ArrayList<>(List.of(vertex1, vertex2, vertex3));
         return new Graph(vertices);
     }
 
@@ -65,7 +65,7 @@ class BruteForceLabelledSubgraphCountingAlgorithmTest {
         vertex5.addNeighbour(vertex3);
         vertex5.addNeighbour(vertex4);
 
-        List<Vertex> vertices = new ArrayList<>(List.of(vertex1, vertex2, vertex3, vertex4, vertex5));
+        ArrayList<Vertex> vertices = new ArrayList<>(List.of(vertex1, vertex2, vertex3, vertex4, vertex5));
         return new Graph(vertices);
     }
 
@@ -86,7 +86,7 @@ class BruteForceLabelledSubgraphCountingAlgorithmTest {
         vertex4.addNeighbour(vertex3);
         vertex4.addNeighbour(vertex2);
 
-        List<Vertex> vertices = new ArrayList<>(List.of(vertex1, vertex2, vertex3, vertex4));
+        ArrayList<Vertex> vertices = new ArrayList<>(List.of(vertex1, vertex2, vertex3, vertex4));
         return new Graph(vertices);
     }
 }

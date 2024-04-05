@@ -1,15 +1,14 @@
 package Graph;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 public class IntersectionGraph extends Graph {
     private final HashMap<Vertex, HashSet<Vertex>> correspondence;
 
-    public IntersectionGraph(List<Vertex> vertices, HashMap<Vertex, HashSet<Vertex>> correspondence) {
+    public IntersectionGraph(ArrayList<Vertex> vertices, HashMap<Vertex, HashSet<Vertex>> correspondence) {
         super(vertices);
         this.correspondence = correspondence;
     }

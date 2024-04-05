@@ -40,24 +40,30 @@ public class LabelledSubgraphCountingAlgorithm {
     private int runForEachSubset(VertexLists mapLists,
                                  List<Vertex> verticesInSubset,
                                  List<Vertex> verticesToChooseFrom) {
-        int count = mapSubsetToHighDegreeVertices(verticesInSubset, mapLists, 0);
-        int numVerticesToChooseFrom = verticesToChooseFrom.size();
-        if (numVerticesToChooseFrom==0||verticesInSubset.size() == numHighDegVerticesG) {
+        int count =0;
+        //first get number of embeddings with vertices in verticesInSubset mapped
+        //to high degree vertices in host
+        VertexLists mapListsforcount = mapLists.deepCopy();
+        mapListsforcount.updateListsToIncludeOnly(verticesToChooseFrom, nonHighDegVerticesG);
+        if (mapListsforcount.isFeasible()) {
+            count = mapSubsetToHighDegreeVertices(verticesInSubset, mapLists, verticesToChooseFrom, 0);
+        }
+
+        if (verticesInSubset.size() == numHighDegVerticesG) {
             return count;
         }
 
-        for (int vertexToAddIndex = 0; vertexToAddIndex< numVerticesToChooseFrom; vertexToAddIndex++) {
-            Vertex vertexToAdd  = verticesToChooseFrom.get(vertexToAddIndex);
+        for (Vertex vertexToAdd: verticesToChooseFrom) {
             List<Vertex> verticesInSubsetCopy = new ArrayList<>(verticesInSubset);
             verticesInSubsetCopy.add(vertexToAdd);
 
+            List<Vertex> verticesToChooseFromCopy = new ArrayList<>(verticesToChooseFrom);
+            verticesToChooseFromCopy.remove(vertexToAdd);
+
             VertexLists mapListsCopy = mapLists.deepCopy();
             mapListsCopy.updateListsToIncludeOnly(List.of(vertexToAdd), highDegVerticesG);
-            List<Vertex> verticesNotInSubset = pattern.getVertices().stream().filter(v -> !verticesInSubsetCopy.contains(v)).toList();
-            mapListsCopy.updateListsToIncludeOnly(verticesNotInSubset, nonHighDegVerticesG);
 
-            if (mapListsCopy.hasEnoughUniqueValues()) {
-                List<Vertex> verticesToChooseFromCopy = verticesToChooseFrom.subList(vertexToAddIndex + 1, numVerticesToChooseFrom);
+            if (mapListsCopy.isFeasible()) {
                 count += runForEachSubset(mapListsCopy, verticesInSubsetCopy, verticesToChooseFromCopy);
             }
         }
@@ -65,7 +71,7 @@ public class LabelledSubgraphCountingAlgorithm {
     }
 
 
-    private int mapSubsetToHighDegreeVertices(List<Vertex> verticesInSubset, VertexLists mapLists, int currentVertexIndex) {
+    private int mapSubsetToHighDegreeVertices(List<Vertex> verticesInSubset, VertexLists mapLists, List<Vertex> verticesToChooseFrom, int currentVertexIndex) {
         if (currentVertexIndex == verticesInSubset.size()) {
             return countComponents(verticesInSubset, mapLists);
         }
@@ -74,10 +80,10 @@ public class LabelledSubgraphCountingAlgorithm {
         Vertex currentVertex = verticesInSubset.get(currentVertexIndex);
 
         for (Vertex mapTo : mapLists.getListOfVertex(currentVertex)) {
-            VertexLists mapListCopy = mapLists.deepCopy();
-            mapListCopy.assignVertex(currentVertex, mapTo);
-            if (mapListCopy.hasNoVertexWithEmptyList() &&mapListCopy.hasEnoughUniqueValues()) {
-                count += mapSubsetToHighDegreeVertices(verticesInSubset, mapListCopy, currentVertexIndex++);
+            VertexLists mapListCopyCopy = mapLists.deepCopy();
+            mapListCopyCopy.assignVertex(currentVertex, mapTo);
+            if (mapListCopyCopy.isFeasible()) {
+                count += mapSubsetToHighDegreeVertices(verticesInSubset, mapListCopyCopy,verticesToChooseFrom, currentVertexIndex+1);
             }
         }
 
@@ -88,7 +94,14 @@ public class LabelledSubgraphCountingAlgorithm {
         int count = 0;
 
         List<IntersectionGraph> connectedComponents = pattern.getConnectedComponentsWithoutVertices(verticesInSubset);
-        //intersection sets ordered by size so that when we want to count non-overlapping copies
+        //runtime efficiency depends upon the vertices of the components
+        //being ordered so that each vertex is preceded in the ordering
+        //by at least one of its neighbours
+        for (IntersectionGraph component : connectedComponents) {
+            component.orderVerticesEachPrecededByNeighbour();
+        }
+
+        //intersection sets are ordered by size so that when we want to count non-overlapping copies
         //of an intersection set S in host, we know the number of (non-overlapping) copies of every
         //intersection set contained in S
         SortedSet<IntersectionSet> orderedIntersectionSets = IntersectionSetFactory.createIntersectionSetsOfGraphs(connectedComponents);

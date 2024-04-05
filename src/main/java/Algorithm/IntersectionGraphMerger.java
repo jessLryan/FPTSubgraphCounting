@@ -114,8 +114,10 @@ public class IntersectionGraphMerger {
 
         updateNewGraphNeighbours(oldToNewVertexMap);
 
-        List<Vertex> newVertices = oldToNewVertexMap.values().stream().distinct().toList();
-        return new IntersectionGraph(newVertices, newCorrespondence);
+        ArrayList<Vertex> newVertices = new ArrayList<>(oldToNewVertexMap.values().stream().distinct().toList());
+        IntersectionGraph mergedGraph = new IntersectionGraph(newVertices, newCorrespondence);
+        mergedGraph.orderVerticesEachPrecededByNeighbour();;
+        return mergedGraph;
     }
 
     private void updateNewGraphNeighbours(Map<Vertex, Vertex> oldToNewVertexMap) {

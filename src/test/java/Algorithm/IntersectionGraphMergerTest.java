@@ -69,7 +69,7 @@ class IntersectionGraphMergerTest {
         Vertex vertex = new Vertex();
         HashMap<Vertex, HashSet<Vertex>> correspondence = new HashMap<>();
         correspondence.put(vertex, new HashSet<>(Set.of(CORRESPONDENCE_VERTICES.get(4))));
-        return new IntersectionGraph(List.of(vertex), correspondence);
+        return new IntersectionGraph(new ArrayList<>(List.of(vertex)), correspondence);
     }
 
     private IntersectionGraph createSingleEdge() {
@@ -90,11 +90,11 @@ class IntersectionGraphMergerTest {
         vertex1.addNeighbour(vertex2);
         vertex2.addNeighbour(vertex1);
 
-        return new IntersectionGraph(List.of(vertex1, vertex2), correspondence);
+        return new IntersectionGraph(new ArrayList<>(List.of(vertex1, vertex2)), correspondence);
     }
 
     private IntersectionGraph createTriangleGraph() {
-        List<Vertex> vertices = new ArrayList<>();
+        ArrayList<Vertex> vertices = new ArrayList<>();
         HashMap<Vertex, HashSet<Vertex>> correspondence = new HashMap<>();
         for (int i = 0; i < 3; i++) {
             Vertex vertex = new Vertex();
@@ -114,7 +114,7 @@ class IntersectionGraphMergerTest {
 
 
     private IntersectionGraph createK4Graph() {
-        List<Vertex> vertices = new ArrayList<>();
+        ArrayList<Vertex> vertices = new ArrayList<>();
         HashMap<Vertex, HashSet<Vertex>> correspondence = new HashMap<>();
         for (int i = 0; i < 4; i++) {
             Vertex vertex = new Vertex();
