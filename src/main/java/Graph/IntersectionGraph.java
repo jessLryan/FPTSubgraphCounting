@@ -31,8 +31,8 @@ public class IntersectionGraph extends Graph {
         if (!vertexLists.isFeasible()) {
             return false;
         }
-
-        return isIsomorphic(0, vertexLists, otherGraph);
+        boolean isIsomorphic = isIsomorphic(0, vertexLists, otherGraph);
+        return isIsomorphic;
     }
 
     private boolean isIsomorphic(int currentVertexIndex, VertexLists vertexLists, IntersectionGraph otherGraph) {

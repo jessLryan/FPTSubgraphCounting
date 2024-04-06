@@ -1,5 +1,6 @@
 package Graph;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
@@ -7,21 +8,19 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class IntersectionSet implements Comparable<IntersectionSet> {
+public class IntersectionSet {
 
     private final List<IntersectionGraph> graphs;
     private final int size;
-    private final SortedSet<IntersectionSet> containedIntersectionSets;
-
-    private int count;
+    private final HashSet<IntersectionSet> containedIntersectionSets;
 
     public IntersectionSet(List<IntersectionGraph> graphs) {
         this.graphs = graphs;
         this.size = graphs.size();
-        this.containedIntersectionSets = new TreeSet<>();
+        this.containedIntersectionSets = new HashSet<>();
     }
 
-    public SortedSet<IntersectionSet> getContainedIntersectionSets() {
+    public HashSet<IntersectionSet> getContainedIntersectionSets() {
         return containedIntersectionSets;
     }
 
@@ -33,18 +32,6 @@ public class IntersectionSet implements Comparable<IntersectionSet> {
         return graphs.stream();
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public void addContainedIntersectionSet(IntersectionSet contained) {
-        containedIntersectionSets.add(contained);
-    }
-
     public void addContainedIntersectionSets(Set<IntersectionSet> contained) {
         containedIntersectionSets.addAll(contained);
     }
@@ -54,10 +41,7 @@ public class IntersectionSet implements Comparable<IntersectionSet> {
     }
 
 
-    @Override
-    public int compareTo(IntersectionSet o) {
-        return Integer.compare(size, o.size);
-    }
+
 
     @Override
     public boolean equals(Object other) {
@@ -73,7 +57,8 @@ public class IntersectionSet implements Comparable<IntersectionSet> {
         }
         Set<IntersectionGraph> thisGraphs = graphStream().collect(Collectors.toSet());
         Set<IntersectionGraph> otherGraphs = otherIntersection.graphStream().collect(Collectors.toSet());
-        return thisGraphs.equals(otherGraphs);
+        boolean result = thisGraphs.equals(otherGraphs);
+        return result;
     }
 
     @Override

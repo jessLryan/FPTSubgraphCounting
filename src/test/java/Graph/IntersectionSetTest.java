@@ -18,38 +18,6 @@ class IntersectionSetTest {
     private final IntersectionGraph LARGER_GRAPH = createLargerGraph();
 
     @Test
-    void testCompareToSameSize() {
-        List<IntersectionGraph> graphs1 = new ArrayList<>();
-        graphs1.add(SMALLER_GRAPH);
-        graphs1.add(LARGER_GRAPH);
-        IntersectionSet intersectionSet1 = new IntersectionSet(graphs1);
-
-        List<IntersectionGraph> graphs2 = new ArrayList<>();
-        graphs2.add(LARGER_GRAPH);
-        graphs2.add(SMALLER_GRAPH);
-        IntersectionSet intersectionSet2 = new IntersectionSet(graphs2);
-
-        assert intersectionSet1.compareTo(intersectionSet2)==0;
-    }
-
-    @Test
-    void testCompareToDifferentSizes() {
-        List<IntersectionGraph> graphs1 = new ArrayList<>();
-        graphs1.add(SMALLER_GRAPH);
-        graphs1.add(LARGER_GRAPH);
-        graphs1.add(LARGER_GRAPH);
-        IntersectionSet intersectionSet1 = new IntersectionSet(graphs1);
-
-        List<IntersectionGraph> graphs2 = new ArrayList<>();
-        graphs2.add(LARGER_GRAPH);
-        graphs2.add(SMALLER_GRAPH);
-        IntersectionSet intersectionSet2 = new IntersectionSet(graphs2);
-
-        assert intersectionSet1.compareTo(intersectionSet2)==1;
-        assert intersectionSet2.compareTo(intersectionSet1)==-1;
-    }
-
-    @Test
     void testEqualsSameGraphsSameOrderTrue() {
         List<IntersectionGraph> graphs1 = new ArrayList<>();
         graphs1.add(SMALLER_GRAPH);

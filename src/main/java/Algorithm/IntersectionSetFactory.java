@@ -4,6 +4,7 @@ import Graph.IntersectionGraph;
 import Graph.IntersectionSet;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.SortedSet;
@@ -31,7 +32,7 @@ public class IntersectionSetFactory {
     }
 
     private static Set<IntersectionSet> createContainedIntersectionSetsWithGraphPairMerged(List<IntersectionGraph> graphs, int graph1Index, int graph2Index) {
-        Set<IntersectionSet> containedSets = new TreeSet<>();
+        Set<IntersectionSet> containedSets = new HashSet<>();
 
         IntersectionGraph graph1 = graphs.get(graph1Index);
         IntersectionGraph graph2 = graphs.get(graph2Index);
@@ -45,8 +46,12 @@ public class IntersectionSetFactory {
             graphsCopy.add(mergedGraph);
             IntersectionSet containedIntersectionSet = new IntersectionSet(graphsCopy);
             createContainedIntersectionSetsOf(containedIntersectionSet);
-
-            containedSets.add(containedIntersectionSet);
+            if (containedSets.contains(containedIntersectionSet)) {
+                System.out.println("was already there");
+            }
+            else {
+                containedSets.add(containedIntersectionSet);
+            }
             containedSets.addAll(containedIntersectionSet.getContainedIntersectionSets());
         }
         return containedSets;

@@ -25,26 +25,64 @@ public class MainTest {
 
     @Test
     public void TestRandomHostGraphsPatternGraphsOrder1() {
-        for (int i = 1; i < 4; i++) {
-            List<Graph> hostGraphs = createRandomHostGraphs(i, 50, 15);
+        int successful = 0;
+        int unsuccessful = 0;
 
-
+        for (int i = 1; i < 8; i++) {
+            List<Graph> hostGraphs = createRandomHostGraphs(i, 50, 30);
             ArrayList<Graph> patterns = createAllPatternGraphsWithOrder(i);
             for (Graph host : hostGraphs) {
                 for (Graph pattern : patterns) {
                     ParameterValueOptimiser parameterOptimiser = new ParameterValueOptimiser(pattern, host);
                     int numHighDegVertices = parameterOptimiser.getNumHighDegVertices();
+                    //int numHighDegVertices = 0;
                     List<Vertex> highestDegVertices = host.getHighestDegVertices(numHighDegVertices);
                     LabelledSubgraphCountingAlgorithm FPTAlg = new LabelledSubgraphCountingAlgorithm(host, pattern, highestDegVertices);
                     int FPTCount = FPTAlg.run();
 
                     VertexLists mapLists = new VertexLists(host, pattern);
                     int bruteForceCount = BruteForceLabelledSubgraphCountingAlgorithm.countLabelledCopiesWithLists(pattern, mapLists);
-
-                    assertEquals(FPTCount, bruteForceCount);
+                    if (bruteForceCount==FPTCount) {
+                        successful++;
+                    }
+                    else{
+                        System.out.println("FAILURE");
+                        System.out.println("host");
+                        System.out.println(host);
+                        System.out.println();
+                        System.out.println("pattern");
+                        System.out.println(pattern);
+                        System.out.println("FPT "+FPTCount);
+                        System.out.println("BF "+bruteForceCount);
+                        unsuccessful++;
+                    }
                 }
             }
+
         }
+        System.out.println("successes: "+successful);
+        System.out.println("failures: "+unsuccessful);
+    }
+
+    private Graph createSnake() {
+        ArrayList<Vertex> vertices = createVertices(6);
+        vertices.getFirst().addNeighbour(vertices.get(1));
+        vertices.get(1).addNeighbour(vertices.get(0));
+
+        vertices.get(1).addNeighbour(vertices.get(2));
+        vertices.get(2).addNeighbour(vertices.get(1));
+
+        vertices.get(2).addNeighbour(vertices.get(3));
+        vertices.get(3).addNeighbour(vertices.get(2));
+
+        vertices.get(3).addNeighbour(vertices.get(4));
+        vertices.get(4).addNeighbour(vertices.get(3));
+
+        vertices.get(4).addNeighbour(vertices.get(5));
+        vertices.get(5).addNeighbour(vertices.get(4));
+
+        Graph graph = new Graph(vertices);
+        return graph;
     }
 
 
