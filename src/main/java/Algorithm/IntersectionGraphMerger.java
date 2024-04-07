@@ -116,7 +116,7 @@ public class IntersectionGraphMerger {
 
         ArrayList<Vertex> newVertices = new ArrayList<>(oldToNewVertexMap.values().stream().distinct().toList());
         IntersectionGraph mergedGraph = new IntersectionGraph(newVertices, newCorrespondence);
-        mergedGraph.orderVerticesEachPrecededByNeighbour();;
+        mergedGraph.orderVerticesSoEachIsPrecededByNeighbour();;
         return mergedGraph;
     }
 

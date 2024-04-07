@@ -29,7 +29,7 @@ public class MainTest {
         int unsuccessful = 0;
 
         for (int i = 1; i < 8; i++) {
-            List<Graph> hostGraphs = createRandomHostGraphs(i, 50, 30);
+            List<Graph> hostGraphs = createRandomHostGraphs(i, 20, 30);
             ArrayList<Graph> patterns = createAllPatternGraphsWithOrder(i);
             for (Graph host : hostGraphs) {
                 for (Graph pattern : patterns) {

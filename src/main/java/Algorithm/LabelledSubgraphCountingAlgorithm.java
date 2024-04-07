@@ -7,13 +7,9 @@ import Graph.VertexLists;
 import Graph.Vertex;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 public class LabelledSubgraphCountingAlgorithm {
 
@@ -127,7 +123,7 @@ public class LabelledSubgraphCountingAlgorithm {
         //being ordered so that each vertex is preceded in the ordering
         //by at least one of its neighbours
         for (IntersectionGraph component : connectedComponents) {
-            component.orderVerticesEachPrecededByNeighbour();
+            component.orderVerticesSoEachIsPrecededByNeighbour();
         }
 
         //intersection sets are ordered by size so that when we want to count non-overlapping copies

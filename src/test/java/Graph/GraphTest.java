@@ -64,7 +64,7 @@ class GraphTest {
     @Test
     void testVertexOrderingPrecededByNeighbour() {
         Graph connectedGraph = createConnectedGraph();
-        connectedGraph.orderVerticesEachPrecededByNeighbour();
+        connectedGraph.orderVerticesSoEachIsPrecededByNeighbour();
         List<Vertex> vertices = connectedGraph.vertices;
         for (int i=1;i<vertices.size();i++) {
             Vertex vertex = vertices.get(i);
