@@ -1,20 +1,18 @@
 package Graph;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class IntersectionSet {
 
-    private final List<IntersectionGraph> graphs;
+    private final ArrayList<IntersectionGraph> graphs;
     private final int size;
     private final HashSet<IntersectionSet> containedIntersectionSets;
 
-    public IntersectionSet(List<IntersectionGraph> graphs) {
+    public IntersectionSet(ArrayList<IntersectionGraph> graphs) {
         this.graphs = graphs;
         this.size = graphs.size();
         this.containedIntersectionSets = new HashSet<>();
@@ -24,7 +22,7 @@ public class IntersectionSet {
         return containedIntersectionSets;
     }
 
-    public List<IntersectionGraph> getGraphs() {
+    public ArrayList<IntersectionGraph> getGraphs() {
         return graphs;
     }
 
@@ -32,16 +30,13 @@ public class IntersectionSet {
         return graphs.stream();
     }
 
-    public void addContainedIntersectionSets(Set<IntersectionSet> contained) {
+    public void addContainedIntersectionSets(HashSet<IntersectionSet> contained) {
         containedIntersectionSets.addAll(contained);
     }
 
     public int size() {
         return graphs.size();
     }
-
-
-
 
     @Override
     public boolean equals(Object other) {
@@ -57,16 +52,15 @@ public class IntersectionSet {
         }
         Set<IntersectionGraph> thisGraphs = graphStream().collect(Collectors.toSet());
         Set<IntersectionGraph> otherGraphs = otherIntersection.graphStream().collect(Collectors.toSet());
-        boolean result = thisGraphs.equals(otherGraphs);
-        return result;
+        return thisGraphs.equals(otherGraphs);
     }
 
     @Override
     public int hashCode() {
-        int vertices = 0;
+        int totalVertices = 0;
         for (IntersectionGraph graph : graphs) {
-            vertices += graph.order();
+            totalVertices += graph.order();
         }
-        return 53 * (size) + 7 * vertices;
+        return 7 * size + 53 * totalVertices;
     }
 }

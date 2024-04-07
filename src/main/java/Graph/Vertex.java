@@ -1,17 +1,16 @@
 package Graph;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Vertex {
 
-    private final List<Vertex> neighbours;
+    private final ArrayList<Vertex> neighbours;
 
     public Vertex() {
         this.neighbours = new ArrayList<>();
     }
 
-    public Vertex(List<Vertex> neighbours) {
+    public Vertex(ArrayList<Vertex> neighbours) {
         this.neighbours = neighbours;
     }
 
@@ -29,7 +28,7 @@ public class Vertex {
         return neighbours.size();
     }
 
-    public List<Vertex> neighbours() {
+    public ArrayList<Vertex> neighbours() {
         return neighbours;
     }
 

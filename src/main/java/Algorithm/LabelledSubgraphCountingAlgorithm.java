@@ -118,7 +118,7 @@ public class LabelledSubgraphCountingAlgorithm {
 
         int count = 1;
 
-        List<IntersectionGraph> connectedComponents = pattern.getConnectedComponentsWithoutVertices(verticesInSubset);
+        ArrayList<IntersectionGraph> connectedComponents = pattern.getConnectedComponentsWithoutVertices(verticesInSubset);
         //runtime efficiency depends upon the vertices of the components
         //being ordered so that each vertex is preceded in the ordering
         //by at least one of its neighbours

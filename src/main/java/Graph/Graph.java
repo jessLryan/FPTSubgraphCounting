@@ -88,13 +88,13 @@ public class Graph {
         return remainingDeg;
     }
 
-    public List<IntersectionGraph> getConnectedComponentsWithoutVertices(List<Vertex> verticesToExclude) {
+    public ArrayList<IntersectionGraph> getConnectedComponentsWithoutVertices(List<Vertex> verticesToExclude) {
         List<Vertex> remainingVertices = vertices.stream().filter(v -> !verticesToExclude.contains(v)).toList();
         //vertices in returned graphs must be new objects
         List<Vertex> remainingVerticesCopy = createCopyOfVertices(remainingVertices);
         Map<Vertex, HashSet<Vertex>> correspondence = createCorrespondenceBetween(remainingVertices, remainingVerticesCopy);
 
-        List<IntersectionGraph> components = new ArrayList<>();
+        ArrayList<IntersectionGraph> components = new ArrayList<>();
         while (!remainingVerticesCopy.isEmpty()) {
             Vertex vertex = remainingVerticesCopy.getFirst();
             HashSet<Vertex> componentVertices = new HashSet<>();

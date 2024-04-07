@@ -6,13 +6,10 @@ import Graph.IntersectionSet;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 public class IntersectionSetFactory {
 
-    public static IntersectionSet createIntersectionSetOfGraphs(List<IntersectionGraph> graphs) {
+    public static IntersectionSet createIntersectionSetOfGraphs(ArrayList<IntersectionGraph> graphs) {
         IntersectionSet initialIntersectionSet = new IntersectionSet(graphs);
         createContainedIntersectionSetsOf(initialIntersectionSet);
         return initialIntersectionSet;
@@ -20,7 +17,7 @@ public class IntersectionSetFactory {
 
     private static void createContainedIntersectionSetsOf(IntersectionSet intersectionSet) {
         int size = intersectionSet.size();
-        List<IntersectionGraph> graphs = intersectionSet.getGraphs();
+        ArrayList<IntersectionGraph> graphs = intersectionSet.getGraphs();
         for (int graph1Index = 0; graph1Index < size - 1; graph1Index++) {
             for (int graph2Index = graph1Index + 1; graph2Index < size; graph2Index++) {
                 //get all contained intersection sets in which this
@@ -31,8 +28,8 @@ public class IntersectionSetFactory {
         }
     }
 
-    private static Set<IntersectionSet> createContainedIntersectionSetsWithGraphPairMerged(List<IntersectionGraph> graphs, int graph1Index, int graph2Index) {
-        Set<IntersectionSet> containedSets = new HashSet<>();
+    private static HashSet<IntersectionSet> createContainedIntersectionSetsWithGraphPairMerged(List<IntersectionGraph> graphs, int graph1Index, int graph2Index) {
+        HashSet<IntersectionSet> containedSets = new HashSet<>();
 
         IntersectionGraph graph1 = graphs.get(graph1Index);
         IntersectionGraph graph2 = graphs.get(graph2Index);
@@ -40,7 +37,7 @@ public class IntersectionSetFactory {
         List<IntersectionGraph> mergedGraphs = graphMerger.createMergedGraphs();
 
         for (IntersectionGraph mergedGraph : mergedGraphs) {
-            List<IntersectionGraph> graphsCopy = new ArrayList<>(graphs);
+            ArrayList<IntersectionGraph> graphsCopy = new ArrayList<>(graphs);
             graphsCopy.remove(graph1);
             graphsCopy.remove(graph2);
             graphsCopy.add(mergedGraph);

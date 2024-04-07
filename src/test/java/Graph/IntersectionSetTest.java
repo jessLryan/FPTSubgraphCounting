@@ -19,12 +19,12 @@ class IntersectionSetTest {
 
     @Test
     void testEqualsSameGraphsSameOrderTrue() {
-        List<IntersectionGraph> graphs1 = new ArrayList<>();
+        ArrayList<IntersectionGraph> graphs1 = new ArrayList<>();
         graphs1.add(SMALLER_GRAPH);
         graphs1.add(LARGER_GRAPH);
         IntersectionSet intersectionSet1 = new IntersectionSet(graphs1);
 
-        List<IntersectionGraph> graphs2 = new ArrayList<>();
+        ArrayList<IntersectionGraph> graphs2 = new ArrayList<>();
         graphs2.add(SMALLER_GRAPH);
         graphs2.add(LARGER_GRAPH);
         IntersectionSet intersectionSet2 = new IntersectionSet(graphs2);
@@ -34,12 +34,12 @@ class IntersectionSetTest {
 
     @Test
     void testEqualsSameGraphsDifferentOrderTrue() {
-        List<IntersectionGraph> graphs1 = new ArrayList<>();
+        ArrayList<IntersectionGraph> graphs1 = new ArrayList<>();
         graphs1.add(SMALLER_GRAPH);
         graphs1.add(LARGER_GRAPH);
         IntersectionSet intersectionSet1 = new IntersectionSet(graphs1);
 
-        List<IntersectionGraph> graphs2 = new ArrayList<>();
+        ArrayList<IntersectionGraph> graphs2 = new ArrayList<>();
         graphs2.add(LARGER_GRAPH);
         graphs2.add(SMALLER_GRAPH);
         IntersectionSet intersectionSet2 = new IntersectionSet(graphs2);
@@ -49,12 +49,12 @@ class IntersectionSetTest {
 
     @Test
     void testEqualsSameGraphsDifferentObjectsTrue() {
-        List<IntersectionGraph> graphs1 = new ArrayList<>();
+        ArrayList<IntersectionGraph> graphs1 = new ArrayList<>();
         graphs1.add(SMALLER_GRAPH);
         graphs1.add(LARGER_GRAPH);
         IntersectionSet intersectionSet1 = new IntersectionSet(graphs1);
 
-        List<IntersectionGraph> graphs2 = new ArrayList<>();
+        ArrayList<IntersectionGraph> graphs2 = new ArrayList<>();
         graphs2.add(createLargerGraph());
         graphs2.add(createSmallerGraph());
         IntersectionSet intersectionSet2 = new IntersectionSet(graphs2);
@@ -64,12 +64,12 @@ class IntersectionSetTest {
 
     @Test
     void testEqualsSameSizeDifferentGraphsFalse() {
-        List<IntersectionGraph> graphs1 = new ArrayList<>();
+        ArrayList<IntersectionGraph> graphs1 = new ArrayList<>();
         graphs1.add(SMALLER_GRAPH);
         graphs1.add(SMALLER_GRAPH);
         IntersectionSet intersectionSet1 = new IntersectionSet(graphs1);
 
-        List<IntersectionGraph> graphs2 = new ArrayList<>();
+        ArrayList<IntersectionGraph> graphs2 = new ArrayList<>();
         graphs2.add(LARGER_GRAPH);
         graphs2.add(SMALLER_GRAPH);
         IntersectionSet intersectionSet2 = new IntersectionSet(graphs2);
@@ -79,12 +79,12 @@ class IntersectionSetTest {
 
     @Test
     void testEqualsDifferentSizeFalse() {
-        List<IntersectionGraph> graphs1 = new ArrayList<>();
+        ArrayList<IntersectionGraph> graphs1 = new ArrayList<>();
         graphs1.add(SMALLER_GRAPH);
         graphs1.add(SMALLER_GRAPH);
         IntersectionSet intersectionSet1 = new IntersectionSet(graphs1);
 
-        List<IntersectionGraph> graphs2 = new ArrayList<>();
+        ArrayList<IntersectionGraph> graphs2 = new ArrayList<>();
         graphs2.add(LARGER_GRAPH);
         graphs2.add(SMALLER_GRAPH);
         IntersectionSet intersectionSet2 = new IntersectionSet(graphs2);
@@ -94,7 +94,7 @@ class IntersectionSetTest {
 
     @Test
     void testHashCodesSameObjectTrue() {
-        List<IntersectionGraph> graphs = new ArrayList<>();
+        ArrayList<IntersectionGraph> graphs = new ArrayList<>();
         graphs.add(SMALLER_GRAPH);
         graphs.add(LARGER_GRAPH);
         IntersectionSet intersectionSet = new IntersectionSet(graphs);
@@ -104,12 +104,12 @@ class IntersectionSetTest {
 
     @Test
     void testHashCodesSameDifferentObjectTrue() {
-        List<IntersectionGraph> graphs1 = new ArrayList<>();
+        ArrayList<IntersectionGraph> graphs1 = new ArrayList<>();
         graphs1.add(SMALLER_GRAPH);
         graphs1.add(LARGER_GRAPH);
         IntersectionSet intersectionSet1 = new IntersectionSet(graphs1);
 
-        List<IntersectionGraph> graphs2 = new ArrayList<>();
+        ArrayList<IntersectionGraph> graphs2 = new ArrayList<>();
         graphs2.add(SMALLER_GRAPH);
         graphs2.add(LARGER_GRAPH);
         IntersectionSet intersectionSet2 = new IntersectionSet(graphs2);
@@ -119,12 +119,12 @@ class IntersectionSetTest {
 
     @Test
     void testHashCodesDifferent() {
-        List<IntersectionGraph> graphs1 = new ArrayList<>();
+        ArrayList<IntersectionGraph> graphs1 = new ArrayList<>();
         graphs1.add(LARGER_GRAPH);
         graphs1.add(LARGER_GRAPH);
         IntersectionSet intersectionSet1 = new IntersectionSet(graphs1);
 
-        List<IntersectionGraph> graphs2 = new ArrayList<>();
+        ArrayList<IntersectionGraph> graphs2 = new ArrayList<>();
         graphs2.add(SMALLER_GRAPH);
         graphs2.add(SMALLER_GRAPH);
         IntersectionSet intersectionSet2 = new IntersectionSet(graphs2);
