@@ -16,7 +16,7 @@ public class IntersectionSetCounter {
     private final VertexLists mapLists;
 
     public IntersectionSetCounter(ArrayList<IntersectionSet> intersectionSets, VertexLists patternGraphVertexLists) {
-        countMap = new HashMap<>();
+        countMap = new HashMap<>(intersectionSets.size());
         mapLists = patternGraphVertexLists;
         for (IntersectionSet intersectionSet : intersectionSets) {
             countMap.put(intersectionSet, countNonOverlappingCopiesOfIntersectionSet(intersectionSet));
@@ -50,7 +50,7 @@ public class IntersectionSetCounter {
 
     private VertexLists createVertexListsForGraph(IntersectionGraph graph) {
         Map<Vertex, HashSet<Vertex>> correspondence = graph.getCorrespondence();
-        HashMap<Vertex, ArrayList<Vertex>> newVertexLists = new HashMap<>();
+        HashMap<Vertex, ArrayList<Vertex>> newVertexLists = new HashMap<>(graph.order());
 
         //list for new vertex is intersection of lists for its corresponding vertices
         for (Vertex vertex : graph.getVertices()) {

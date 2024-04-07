@@ -63,7 +63,7 @@ public class VertexLists {
     }
 
     public VertexLists deepCopy() {
-        HashMap<Vertex, ArrayList<Vertex>> mapCopy = new HashMap<>();
+        HashMap<Vertex, ArrayList<Vertex>> mapCopy = new HashMap<>(map.size());
         for (Vertex key : map.keySet()) {
             mapCopy.put(key, new ArrayList<>(map.get(key)));
         }

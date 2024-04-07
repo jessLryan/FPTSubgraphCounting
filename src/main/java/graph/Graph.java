@@ -20,7 +20,7 @@ public class Graph {
     //note that the following method will throw exception if the graph
     //is not connected
     public void orderVerticesSoEachIsPrecededByNeighbour() {
-        ArrayList<Vertex> verticesCopy = new ArrayList<>();
+        ArrayList<Vertex> verticesCopy = new ArrayList<>(vertices.size());
         Vertex firstVertex = vertices.removeFirst();
         verticesCopy.add(firstVertex);
         int numVerticesLeftToAdd = vertices.size();
@@ -97,7 +97,7 @@ public class Graph {
             getReachableVertices(vertex, componentVertices);
 
             ArrayList<Vertex> componentVertexList = new ArrayList<>(componentVertices.stream().toList());
-            HashMap<Vertex, HashSet<Vertex>> componentCorrespondence = new HashMap<>();
+            HashMap<Vertex, HashSet<Vertex>> componentCorrespondence = new HashMap<>(componentVertexList.size());
             for (Vertex componentVertex : componentVertexList) {
                 componentCorrespondence.put(componentVertex, correspondence.get(componentVertex));
             }
