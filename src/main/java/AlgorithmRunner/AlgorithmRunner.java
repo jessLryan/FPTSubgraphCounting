@@ -10,11 +10,15 @@ import java.util.List;
 public class AlgorithmRunner {
 
     public static void runAlgorithm(RunResult result, Graph hostGraph, Graph patternGraph) {
-        Runtime.getRuntime().addShutdownHook(
-                new Thread(() -> result.setStatus(RunStatus.INTERRUPTED))
-        );
 
         long startTime = System.currentTimeMillis();
+        Runtime.getRuntime().addShutdownHook(
+                new Thread(() -> {
+                    long endTime = System.currentTimeMillis();
+                    result.setStatus(RunStatus.INTERRUPTED);
+                    result.setRuntimeInMilliseconds(endTime - startTime);
+                })
+        );
 
         ParameterValueOptimiser parameterValueOptimiser = new ParameterValueOptimiser(hostGraph, patternGraph);
         int numHighDegVertices = parameterValueOptimiser.getNumHighDegVertices();
