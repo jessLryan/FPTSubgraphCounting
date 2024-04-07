@@ -1,8 +1,8 @@
-package AlgorithmRunner;
+package algorithmRunner;
 
-import Graph.Graph;
-import Graph.GraphStatistics;
-import Graph.GraphType;
+import graph.Graph;
+import graph.GraphStatistics;
+import graph.GraphType;
 
 import java.time.LocalDate;
 

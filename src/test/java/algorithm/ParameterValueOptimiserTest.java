@@ -1,7 +1,7 @@
-package Algorithm;
+package algorithm;
 
-import Graph.Graph;
-import Graph.Vertex;
+import graph.Graph;
+import graph.Vertex;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

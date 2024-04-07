@@ -1,4 +1,4 @@
-package Graph;
+package graph;
 
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class IntersectionSetTest {
 
@@ -74,7 +75,7 @@ class IntersectionSetTest {
         graphs2.add(SMALLER_GRAPH);
         IntersectionSet intersectionSet2 = new IntersectionSet(graphs2);
 
-        assertNotEquals(intersectionSet1,intersectionSet2);
+        assertNotEquals(intersectionSet1, intersectionSet2);
     }
 
     @Test
@@ -89,7 +90,7 @@ class IntersectionSetTest {
         graphs2.add(SMALLER_GRAPH);
         IntersectionSet intersectionSet2 = new IntersectionSet(graphs2);
 
-        assertNotEquals(intersectionSet1,intersectionSet2);
+        assertNotEquals(intersectionSet1, intersectionSet2);
     }
 
     @Test

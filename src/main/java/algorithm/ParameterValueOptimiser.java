@@ -1,6 +1,6 @@
-package Algorithm;
+package algorithm;
 
-import Graph.Graph;
+import graph.Graph;
 
 import java.math.BigInteger;
 

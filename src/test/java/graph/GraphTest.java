@@ -1,4 +1,4 @@
-package Graph;
+package graph;
 
 import org.junit.jupiter.api.Test;
 
@@ -66,10 +66,10 @@ class GraphTest {
         Graph connectedGraph = createConnectedGraph();
         connectedGraph.orderVerticesSoEachIsPrecededByNeighbour();
         List<Vertex> vertices = connectedGraph.vertices;
-        for (int i=1;i<vertices.size();i++) {
+        for (int i = 1; i < vertices.size(); i++) {
             Vertex vertex = vertices.get(i);
             Vertex neighbourPrecedingInList = null;
-            for (int j=0;j<i;j++) {
+            for (int j = 0; j < i; j++) {
                 Vertex possibleNeighbour = vertices.get(j);
                 if (vertex.isAdjacentTo(possibleNeighbour)) {
                     neighbourPrecedingInList = possibleNeighbour;

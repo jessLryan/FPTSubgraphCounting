@@ -1,7 +1,7 @@
-package Algorithm;
+package algorithm;
 
-import Graph.IntersectionGraph;
-import Graph.Vertex;
+import graph.IntersectionGraph;
+import graph.Vertex;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

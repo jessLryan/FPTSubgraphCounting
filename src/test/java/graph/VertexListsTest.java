@@ -1,4 +1,4 @@
-package Graph;
+package graph;
 
 import org.junit.jupiter.api.Test;
 
@@ -79,7 +79,7 @@ class VertexListsTest {
 
         vertexLists.assignVertex(key1, value1);
         assertEquals(vertexLists.getListOfVertex(key2), List.of(value2));
-        assertEquals(vertexLists.getListOfVertex(key3),List.of(value2, value3));
+        assertEquals(vertexLists.getListOfVertex(key3), List.of(value2, value3));
     }
 
     @Test
@@ -100,9 +100,9 @@ class VertexListsTest {
 
         vertexLists.updateListsToIncludeOnly(List.of(key1, key2), List.of(value1));
 
-        assertEquals(vertexLists.getListOfVertex(key1),List.of(value1));
-        assertEquals(vertexLists.getListOfVertex(key2),List.of(value1));
-        assertEquals(vertexLists.getListOfVertex(key3),List.of(value1, value2, value3));
+        assertEquals(vertexLists.getListOfVertex(key1), List.of(value1));
+        assertEquals(vertexLists.getListOfVertex(key2), List.of(value1));
+        assertEquals(vertexLists.getListOfVertex(key3), List.of(value1, value2, value3));
     }
 
     @Test

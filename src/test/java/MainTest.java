@@ -1,12 +1,11 @@
-import Algorithm.BruteForceLabelledSubgraphCountingAlgorithm;
-import Algorithm.LabelledSubgraphCountingAlgorithm;
-import Algorithm.ParameterValueOptimiser;
+import algorithm.BruteForceLabelledSubgraphCountingAlgorithm;
+import algorithm.LabelledSubgraphCountingAlgorithm;
+import algorithm.ParameterValueOptimiser;
+import graph.Graph;
+import graph.GraphFileReader;
+import graph.Vertex;
+import graph.VertexLists;
 import org.junit.Test;
-
-import Graph.Graph;
-import Graph.GraphFileReader;
-import Graph.Vertex;
-import Graph.VertexLists;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -15,13 +14,11 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-import static org.junit.Assert.assertEquals;
-
 
 public class MainTest {
 
 
-    String resourcesDirectoryPath = "src/test/resources";
+    final String resourcesDirectoryPath = "src/test/resources";
 
     @Test
     public void TestRandomHostGraphsPatternGraphsOrder1() {
@@ -42,26 +39,25 @@ public class MainTest {
 
                     VertexLists mapLists = new VertexLists(host, pattern);
                     int bruteForceCount = BruteForceLabelledSubgraphCountingAlgorithm.countLabelledCopiesWithLists(pattern, mapLists);
-                    if (bruteForceCount==FPTCount) {
+                    if (bruteForceCount == FPTCount) {
                         successful++;
-                    }
-                    else{
+                    } else {
                         System.out.println("FAILURE");
                         System.out.println("host");
                         System.out.println(host);
                         System.out.println();
                         System.out.println("pattern");
                         System.out.println(pattern);
-                        System.out.println("FPT "+FPTCount);
-                        System.out.println("BF "+bruteForceCount);
+                        System.out.println("FPT " + FPTCount);
+                        System.out.println("BF " + bruteForceCount);
                         unsuccessful++;
                     }
                 }
             }
 
         }
-        System.out.println("successes: "+successful);
-        System.out.println("failures: "+unsuccessful);
+        System.out.println("successes: " + successful);
+        System.out.println("failures: " + unsuccessful);
     }
 
     private Graph createSnake() {
@@ -81,8 +77,7 @@ public class MainTest {
         vertices.get(4).addNeighbour(vertices.get(5));
         vertices.get(5).addNeighbour(vertices.get(4));
 
-        Graph graph = new Graph(vertices);
-        return graph;
+        return new Graph(vertices);
     }
 
 

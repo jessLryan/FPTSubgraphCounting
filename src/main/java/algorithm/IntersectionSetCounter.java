@@ -1,9 +1,9 @@
-package Algorithm;
+package algorithm;
 
-import Graph.IntersectionGraph;
-import Graph.IntersectionSet;
-import Graph.Vertex;
-import Graph.VertexLists;
+import graph.IntersectionGraph;
+import graph.IntersectionSet;
+import graph.Vertex;
+import graph.VertexLists;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ public class IntersectionSetCounter {
         }
     }
 
-    public int getCountOfSet(IntersectionSet intersectionSet) {
+    public int getNonOverlappingCopiesOfSet(IntersectionSet intersectionSet) {
         return countMap.get(intersectionSet);
     }
 

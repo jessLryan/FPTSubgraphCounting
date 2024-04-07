@@ -1,9 +1,9 @@
-package AlgorithmRunner;
+package algorithmRunner;
 
-import Algorithm.LabelledSubgraphCountingAlgorithm;
-import Algorithm.ParameterValueOptimiser;
-import Graph.Graph;
-import Graph.Vertex;
+import algorithm.LabelledSubgraphCountingAlgorithm;
+import algorithm.ParameterValueOptimiser;
+import graph.Graph;
+import graph.Vertex;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package Algorithm;
+package algorithm;
 
-import Graph.Vertex;
-import Graph.VertexLists;
-import Graph.Graph;
+import graph.Graph;
+import graph.Vertex;
+import graph.VertexLists;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -22,35 +22,35 @@ class LabelledSubgraphCountingAlgorithmTest {
 
     private final Graph CUSTOM_PATTERN = createCustomPattern();
 
-//    @Test
-//    void testSingletonPatternTriangleHost() {
-//        ParameterValueOptimiser parameterOptimiser = new ParameterValueOptimiser(SINGLETON, TRIANGLE);
-//        int numHighDegVertices = parameterOptimiser.getNumHighDegVertices();
-//
-//        List<Vertex> highestDegVertices = TRIANGLE.getHighestDegVertices(numHighDegVertices);
-//        LabelledSubgraphCountingAlgorithm FPTAlg = new LabelledSubgraphCountingAlgorithm(TRIANGLE, SINGLETON, highestDegVertices);
-//        int FPTCount = FPTAlg.run();
-//
-//        VertexLists mapLists = new VertexLists(TRIANGLE, SINGLETON);
-//        int bruteForceCount = BruteForceLabelledSubgraphCountingAlgorithm.countLabelledCopiesWithLists(SINGLETON, mapLists);
-//
-//        assertEquals(bruteForceCount, FPTCount);
-//    }
-//
-//    @Test
-//    void testSingleEdgePatternTriangleHost() {
-//        ParameterValueOptimiser parameterOptimiser = new ParameterValueOptimiser(SINGLE_EDGE, TRIANGLE);
-//        int numHighDegVertices = parameterOptimiser.getNumHighDegVertices();
-//
-//        List<Vertex> highestDegVertices = TRIANGLE.getHighestDegVertices(numHighDegVertices);
-//        //LabelledSubgraphCountingAlgorithm FPTAlg = new LabelledSubgraphCountingAlgorithm(TRIANGLE, SINGLE_EDGE, highestDegVertices);
-//        //int FPTCount = FPTAlg.run();
-//
-//        VertexLists mapLists = new VertexLists(TRIANGLE, SINGLE_EDGE);
-//        int bruteForceCount = BruteForceLabelledSubgraphCountingAlgorithm.countLabelledCopiesWithLists(SINGLE_EDGE, mapLists);
-//
-//        //assertEquals(bruteForceCount, FPTCount);
-//    }
+    @Test
+    void testSingletonPatternTriangleHost() {
+        ParameterValueOptimiser parameterOptimiser = new ParameterValueOptimiser(SINGLETON, TRIANGLE);
+        int numHighDegVertices = parameterOptimiser.getNumHighDegVertices();
+
+        List<Vertex> highestDegVertices = TRIANGLE.getHighestDegVertices(numHighDegVertices);
+        LabelledSubgraphCountingAlgorithm FPTAlg = new LabelledSubgraphCountingAlgorithm(TRIANGLE, SINGLETON, highestDegVertices);
+        int FPTCount = FPTAlg.run();
+
+        VertexLists mapLists = new VertexLists(TRIANGLE, SINGLETON);
+        int bruteForceCount = BruteForceLabelledSubgraphCountingAlgorithm.countLabelledCopiesWithLists(SINGLETON, mapLists);
+
+        assertEquals(bruteForceCount, FPTCount);
+    }
+
+    @Test
+    void testSingleEdgePatternTriangleHost() {
+        ParameterValueOptimiser parameterOptimiser = new ParameterValueOptimiser(SINGLE_EDGE, TRIANGLE);
+        int numHighDegVertices = parameterOptimiser.getNumHighDegVertices();
+
+        List<Vertex> highestDegVertices = TRIANGLE.getHighestDegVertices(numHighDegVertices);
+        LabelledSubgraphCountingAlgorithm FPTAlg = new LabelledSubgraphCountingAlgorithm(TRIANGLE, SINGLE_EDGE, highestDegVertices);
+        int FPTCount = FPTAlg.run();
+
+        VertexLists mapLists = new VertexLists(TRIANGLE, SINGLE_EDGE);
+        int bruteForceCount = BruteForceLabelledSubgraphCountingAlgorithm.countLabelledCopiesWithLists(SINGLE_EDGE, mapLists);
+
+        assertEquals(bruteForceCount, FPTCount);
+    }
 
     @Test
     void testCustomHost() {
@@ -63,9 +63,9 @@ class LabelledSubgraphCountingAlgorithmTest {
 
         VertexLists mapLists = new VertexLists(CUSTOM_HOST, CUSTOM_PATTERN);
         int bruteForceCount = BruteForceLabelledSubgraphCountingAlgorithm.countLabelledCopiesWithLists(CUSTOM_PATTERN, mapLists);
-        System.out.println("num high deg "+parameterOptimiser.getNumHighDegVertices());
-        System.out.println("FPT "+FPTCount);
-        System.out.println("BruteForce "+bruteForceCount);
+        System.out.println("num high deg " + parameterOptimiser.getNumHighDegVertices());
+        System.out.println("FPT " + FPTCount);
+        System.out.println("BruteForce " + bruteForceCount);
         assertEquals(bruteForceCount, FPTCount);
     }
 
@@ -140,7 +140,6 @@ class LabelledSubgraphCountingAlgorithmTest {
         vertices.get(4).addNeighbour(vertices.get(5));
         vertices.get(5).addNeighbour(vertices.get(4));
 
-        Graph graph = new Graph(vertices);
-        return graph;
+       return new Graph(vertices);
     }
 }

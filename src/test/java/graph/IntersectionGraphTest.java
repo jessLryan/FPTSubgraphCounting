@@ -1,4 +1,4 @@
-package Graph;
+package graph;
 
 import org.junit.jupiter.api.Test;
 
@@ -6,12 +6,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.IntStream;
 
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class IntersectionGraphTest {
 
@@ -24,18 +23,18 @@ class IntersectionGraphTest {
         Vertex patternVertex = SMALLER_GRAPH.vertices.getFirst();
         Vertex hostVertex = HOST_VERTICES.getFirst();
         Set<Vertex> correspondenceSet = Set.of(hostVertex);
-        assertEquals(SMALLER_GRAPH.vertexCorrespondence(patternVertex),correspondenceSet);
+        assertEquals(SMALLER_GRAPH.vertexCorrespondence(patternVertex), correspondenceSet);
     }
 
     @Test
     void testEqualsSameObjectTrue() {
-        assertEquals(SMALLER_GRAPH,SMALLER_GRAPH);
+        assertEquals(SMALLER_GRAPH, SMALLER_GRAPH);
     }
 
     @Test
     void testEqualsDifferentObjectsButIdenticalTrue() {
         IntersectionGraph smallerGraphCopy = createSmallerGraph();
-        assertEquals(SMALLER_GRAPH,smallerGraphCopy);
+        assertEquals(SMALLER_GRAPH, smallerGraphCopy);
     }
 
 

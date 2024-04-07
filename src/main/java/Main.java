@@ -1,8 +1,7 @@
-import Algorithm.LabelledSubgraphCountingAlgorithm;
-import AlgorithmRunner.AlgorithmRunner;
-import AlgorithmRunner.RunResult;
-import Graph.Graph;
-import Graph.GraphFileReader;
+import algorithmRunner.AlgorithmRunner;
+import algorithmRunner.RunResult;
+import graph.Graph;
+import graph.GraphFileReader;
 
 public class Main {
 

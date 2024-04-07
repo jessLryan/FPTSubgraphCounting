@@ -1,4 +1,4 @@
-package AlgorithmRunner;
+package algorithmRunner;
 
 public enum RunStatus {
 

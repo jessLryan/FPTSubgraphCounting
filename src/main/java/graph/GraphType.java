@@ -1,4 +1,4 @@
-package Graph;
+package graph;
 
 public enum GraphType {
     HOST_GRAPH,

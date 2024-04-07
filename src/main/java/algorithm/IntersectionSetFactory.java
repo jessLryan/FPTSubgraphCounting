@@ -1,7 +1,7 @@
-package Algorithm;
+package algorithm;
 
-import Graph.IntersectionGraph;
-import Graph.IntersectionSet;
+import graph.IntersectionGraph;
+import graph.IntersectionSet;
 
 import java.util.ArrayList;
 import java.util.HashSet;

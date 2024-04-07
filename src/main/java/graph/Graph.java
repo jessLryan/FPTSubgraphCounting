@@ -1,4 +1,4 @@
-package Graph;
+package graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,10 +41,6 @@ public class Graph {
             }
         }
         throw new IllegalArgumentException("vertex ordering not possible");
-    }
-
-    public Vertex getVertexAtIndex(int index) {
-        return vertices.get(index);
     }
 
     public ArrayList<Vertex> getVertices() {
