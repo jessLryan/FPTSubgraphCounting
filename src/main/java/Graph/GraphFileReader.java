@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.IntStream;
 
 public class GraphFileReader {
@@ -15,8 +14,9 @@ public class GraphFileReader {
         BufferedReader reader = createBufferedReader(filepath);
         try {
             String line = reader.readLine();
-            int order = Integer.parseInt(line);
-            ArrayList<Vertex> vertices = createVertices(order);
+            int graphOrder = Integer.parseInt(line);
+            ArrayList<Vertex> vertices = createVertices(graphOrder);
+
             line = reader.readLine();
             for (Vertex vertex : vertices) {
                 String[] neighboursAsStrings = line.split(" ");
