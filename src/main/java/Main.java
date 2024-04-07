@@ -5,7 +5,7 @@ import graph.GraphFileReader;
 
 public class Main {
 
-    public static void Main(String[] args) {
+    public static void main(String[] args) {
         String patternGraphFilepath = args[0];
         String hostGraphFilepath = args[1];
 
