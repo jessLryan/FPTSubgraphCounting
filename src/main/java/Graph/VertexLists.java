@@ -1,8 +1,8 @@
 package Graph;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class VertexLists {
 
-    private final Map<Vertex, ArrayList<Vertex>> map;
+    private final HashMap<Vertex, ArrayList<Vertex>> map;
 
     public VertexLists(HashMap<Vertex, ArrayList<Vertex>> map) {
         this.map = map;
@@ -20,7 +20,8 @@ public class VertexLists {
         this(pattern.getVertices(), host.getVertices());
     }
 
-    private VertexLists(List<Vertex> keys, List<Vertex> values) {
+    //we only add vertices to a list if vertex degree is high enough
+    private VertexLists(ArrayList<Vertex> keys, ArrayList<Vertex> values) {
         map = new HashMap<>(keys.size());
         int numValues = values.size();
         for (Vertex key : keys) {
@@ -42,26 +43,22 @@ public class VertexLists {
         return map.get(key);
     }
 
+    //returns true if there exists at least one mapping of the vertices
+    //in keys to the vertices in their lists
+    public boolean isFeasible() {
+        return (atLeastOneListIsNonEmpty() && hasNoVertexWithEmptyList() && hasEnoughUniqueValues());
+    }
+
     public boolean atLeastOneListIsNonEmpty() {
-        for (List<Vertex> list : map.values()) {
-            if (!list.isEmpty()) {
-                return true;
-            }
-        }
-        return false;
+        return map.values().stream().anyMatch(list -> !list.isEmpty());
     }
 
     public boolean hasNoVertexWithEmptyList() {
-        for (Map.Entry<Vertex, ArrayList<Vertex>> entry : map.entrySet()) {
-            if (entry.getValue().isEmpty()) {
-                return false;
-            }
-        }
-        return true;
+        return map.entrySet().stream().noneMatch(entry -> entry.getValue().isEmpty());
     }
 
     public boolean hasEnoughUniqueValues() {
-        Set<Vertex> uniqueVertices = map.keySet().stream().flatMap(vertex -> map.get(vertex).stream()).collect(Collectors.toCollection(HashSet::new));
+        Set<Vertex> uniqueVertices = map.values().stream().flatMap(Collection::stream).collect(Collectors.toSet());
         return uniqueVertices.size() >= map.keySet().size();
     }
 
@@ -76,23 +73,22 @@ public class VertexLists {
     public void assignVertex(Vertex key, Vertex value) {
         List<Vertex> valueNeighbours = value.neighbours();
         map.remove(key);
+        //update neighbours of key so that their lists contain
+        //only neighbours of value
         for (Map.Entry<Vertex, ArrayList<Vertex>> entry : map.entrySet()) {
             if (entry.getKey().isAdjacentTo(key)) {
                 entry.getValue().retainAll(valueNeighbours);
-            }
-            else {
+            } else {
+                //remove value from every list
                 entry.getValue().remove(value);
             }
         }
     }
 
-    public void updateListsToIncludeOnly(List<Vertex> keys, List<Vertex> values) {
+    public void updateListsToIncludeOnly(List<Vertex> keys, List<Vertex> valuesToInclude) {
         for (Vertex key : keys) {
-            map.get(key).retainAll(values);
+            map.get(key).retainAll(valuesToInclude);
         }
     }
 
-    public boolean isFeasible() {
-        return (atLeastOneListIsNonEmpty() && hasNoVertexWithEmptyList() && hasEnoughUniqueValues());
-    }
 }

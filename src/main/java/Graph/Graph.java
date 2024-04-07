@@ -47,7 +47,7 @@ public class Graph {
         return vertices.get(index);
     }
 
-    public List<Vertex> getVertices() {
+    public ArrayList<Vertex> getVertices() {
         return vertices;
     }
 
