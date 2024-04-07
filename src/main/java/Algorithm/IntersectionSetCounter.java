@@ -1,9 +1,9 @@
 package Algorithm;
 
-import Graph.VertexLists;
-import Graph.IntersectionSet;
 import Graph.IntersectionGraph;
+import Graph.IntersectionSet;
 import Graph.Vertex;
+import Graph.VertexLists;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 public class IntersectionSetCounter {
-    HashMap<IntersectionSet, Integer> countMap;
-    VertexLists mapLists;
+    private final HashMap<IntersectionSet, Integer> countMap;
+    private final VertexLists mapLists;
 
-    public IntersectionSetCounter(ArrayList<IntersectionSet> intersectionSets, VertexLists vmapLists) {
+    public IntersectionSetCounter(ArrayList<IntersectionSet> intersectionSets, VertexLists patternGraphVertexLists) {
         countMap = new HashMap<>();
-        mapLists = vmapLists;
+        mapLists = patternGraphVertexLists;
         for (IntersectionSet intersectionSet : intersectionSets) {
             countMap.put(intersectionSet, countNonOverlappingCopiesOfIntersectionSet(intersectionSet));
         }
@@ -28,20 +28,17 @@ public class IntersectionSetCounter {
     }
 
     public int countNonOverlappingCopiesOfIntersectionSet(IntersectionSet intersectionSet) {
-        int totalCount = countAllCopiesOfIntersectionSet(intersectionSet, mapLists);
+        int totalCount = countAllCopiesOfIntersectionSet(intersectionSet);
         for (IntersectionSet containedSet : intersectionSet.getContainedIntersectionSets()) {
-            if (!countMap.containsKey(containedSet)) {
-                System.out.println("doesn't contain key with size "+containedSet.size());
-            }
             totalCount -= countMap.get(containedSet);
         }
         return totalCount;
     }
 
-    private int countAllCopiesOfIntersectionSet(IntersectionSet intersectionSet, VertexLists mapLists) {
+    private int countAllCopiesOfIntersectionSet(IntersectionSet intersectionSet) {
         int count = 1;
         for (IntersectionGraph graph : intersectionSet.getGraphs()) {
-            VertexLists graphMapList = createVertexListsForGraph(graph, mapLists);
+            VertexLists graphMapList = createVertexListsForGraph(graph);
             int graphCount = BruteForceLabelledSubgraphCountingAlgorithm.countLabelledCopiesWithLists(graph, graphMapList);
             if (graphCount == 0) {
                 return 0;
@@ -51,23 +48,20 @@ public class IntersectionSetCounter {
         return count;
     }
 
-    private static VertexLists createVertexListsForGraph(IntersectionGraph graph, VertexLists map) {
+    private VertexLists createVertexListsForGraph(IntersectionGraph graph) {
         Map<Vertex, HashSet<Vertex>> correspondence = graph.getCorrespondence();
-        HashMap<Vertex, ArrayList<Vertex>> newmap = new HashMap<>();
+        HashMap<Vertex, ArrayList<Vertex>> newVertexLists = new HashMap<>();
+
+        //list for new vertex is intersection of lists for its corresponding vertices
         for (Vertex vertex : graph.getVertices()) {
-            ArrayList<Vertex> listForVertex = new ArrayList<>();
-            if (correspondence.get(vertex).isEmpty()) {
-                newmap.put(vertex, listForVertex);
+            List<Vertex> correspondenceOfVertex = correspondence.get(vertex).stream().toList();
+            ArrayList<Vertex> listForVertex = new ArrayList<>(mapLists.getListOfVertex(correspondenceOfVertex.getFirst()));
+            for (int i = 1; i < correspondenceOfVertex.size(); i++) {
+                listForVertex.retainAll(mapLists.getListOfVertex(correspondenceOfVertex.get(i)));
             }
-            else {
-                List<Vertex> corr = correspondence.get(vertex).stream().toList();
-                listForVertex.addAll(map.getListOfVertex(corr.getFirst()));
-                for (int i=1;i< corr.size();i++) {
-                    listForVertex.retainAll(map.getListOfVertex(corr.get(i)));
-                }
-            }
-            newmap.put(vertex, listForVertex);
+
+            newVertexLists.put(vertex, listForVertex);
         }
-        return new VertexLists(newmap);
+        return new VertexLists(newVertexLists);
     }
 }
