@@ -28,9 +28,9 @@ public class ParameterValueOptimiser {
         for (int numVerticesRemoved = 1; numVerticesRemoved <= patternOrder; numVerticesRemoved++) {
             int maxDegRemaining = host.maxDegRemaining(numVerticesRemoved);
 
-            BigInteger term1 = BigInteger.valueOf(numVerticesRemoved * patternOrder).pow(numVerticesRemoved+1);
+            BigInteger term1 = BigInteger.valueOf((long) numVerticesRemoved * patternOrder).pow(numVerticesRemoved + 1);
             BigInteger term2 = BigInteger.valueOf(maxDegRemaining).pow(patternOrder);
-            if (term1.compareTo(functionValue)<0&&term2.compareTo(functionValue)<0) {
+            if (term1.compareTo(functionValue) < 0 && term2.compareTo(functionValue) < 0) {
                 BigInteger newFunctionValue = term1.multiply(term2);
 
                 if (newFunctionValue.compareTo(functionValue) < 1) {
