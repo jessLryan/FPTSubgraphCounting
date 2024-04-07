@@ -24,11 +24,11 @@ public class AlgorithmRunner {
         List<Vertex> highDegVerticesHost = hostGraph.getHighestDegVertices(numHighDegVertices);
         LabelledSubgraphCountingAlgorithm labelledSubgraphCountingAlgorithm = new LabelledSubgraphCountingAlgorithm(hostGraph, patternGraph, highDegVerticesHost);
         int count = labelledSubgraphCountingAlgorithm.run();
+        result.setCount(count);
 
         long endTime = System.currentTimeMillis();
-
         result.setRuntimeInMilliseconds(endTime - startTime);
-        result.setCount(count);
+
         if (count > 0) {
             result.setStatus(RunStatus.PASS);
         } else {
