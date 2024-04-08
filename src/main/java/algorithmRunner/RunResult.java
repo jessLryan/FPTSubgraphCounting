@@ -4,10 +4,10 @@ import graph.Graph;
 import graph.GraphStatistics;
 import graph.GraphType;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class RunResult {
-    private final LocalDate date;
+    private final LocalDateTime datetime;
     private final GraphStatistics patternGraphStatistics;
     private final GraphStatistics hostGraphStatistics;
     private Integer numberOfHighDegreeVertices = null;
@@ -22,21 +22,20 @@ public class RunResult {
                      String patternGraphFilepath) {
         patternGraphStatistics = new GraphStatistics(patternGraph, patternGraphFilepath, GraphType.PATTERN_GRAPH);
         hostGraphStatistics = new GraphStatistics(hostGraph, hostGraphFilepath, GraphType.HOST_GRAPH);
-        date = LocalDate.now();
+        datetime = LocalDateTime.now();
     }
 
     @Override
     public String toString() {
-        return "RunResult{" +
-                "date: " + date +
-                ", pattern graph statistics: " + patternGraphStatistics +
-                ", host graph statistics: " + hostGraphStatistics +
-                ", number of high degree vertices parameter: " + numberOfHighDegreeVertices +
-                ", maximum degree of remaining host graph: " + maximumDegreeOfRemainingVertices +
-                ", run status: " + status +
-                ", count: " + count +
-                ", runtime in milliseconds: " + runtimeInMilliseconds +
-                '}';
+        return "RunResult\n" +
+                "datetime: " + datetime + "\n" +
+                "pattern graph statistics: " + patternGraphStatistics + "\n" +
+                "host graph statistics: " + hostGraphStatistics + "\n" +
+                "number of high degree vertices parameter: " + numberOfHighDegreeVertices + "\n" +
+                "maximum degree of remaining host graph: " + maximumDegreeOfRemainingVertices + "\n" +
+                "run status: " + status + "\n" +
+                "count: " + count + "\n" +
+                "runtime in milliseconds: " + runtimeInMilliseconds;
     }
 
     public void setMaximumDegreeOfRemainingVertices(int maximumDegreeOfRemainingVertices) {

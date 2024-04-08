@@ -21,13 +21,11 @@ public class GraphStatistics {
 
     @Override
     public String toString() {
-        return "GraphStatistics{" +
-                "filepath: " + filepath + '\'' +
-                ", graph type: " + graphType +
-                ", order: " + order +
-                ", number of edges: " + numEdges +
-                ", average degree: " + averageDegree +
-                ", maximum degree: " + maxDegree +
-                '}';
+        return "filepath: " + filepath + "\n" +
+                "graph type: " + graphType + "\n" +
+                "order: " + order + "\n" +
+                "number of edges: " + numEdges + "\n" +
+                "average degree: " + averageDegree + "\n" +
+                "maximum degree: " + maxDegree + "\n" ;
     }
 }
