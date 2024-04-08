@@ -28,14 +28,14 @@ public class RunResult {
     @Override
     public String toString() {
         return "RunResult{" +
-                "date=" + date +
-                ", patternGraphStatistics=" + patternGraphStatistics +
-                ", hostGraphStatistics=" + hostGraphStatistics +
-                ", numberOfHighDegreeVertices=" + numberOfHighDegreeVertices +
-                ", maximumDegreeOfRemainingVertices=" + maximumDegreeOfRemainingVertices +
-                ", status=" + status +
-                ", count=" + count +
-                ", runtimeInMilliseconds=" + runtimeInMilliseconds +
+                "date: " + date +
+                ", pattern graph statistics: " + patternGraphStatistics +
+                ", host graph statistics: " + hostGraphStatistics +
+                ", number of high degree vertices parameter: " + numberOfHighDegreeVertices +
+                ", maximum degree of remaining host graph: " + maximumDegreeOfRemainingVertices +
+                ", run status: " + status +
+                ", count: " + count +
+                ", runtime in milliseconds: " + runtimeInMilliseconds +
                 '}';
     }
 
