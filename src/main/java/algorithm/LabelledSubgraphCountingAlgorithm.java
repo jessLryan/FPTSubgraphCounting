@@ -130,7 +130,7 @@ public class LabelledSubgraphCountingAlgorithm {
         //intersection set contained in S
         ArrayList<IntersectionSet> containedSetsOrdered = new ArrayList<>(containedIntersectionSets.stream().toList());
         containedSetsOrdered.add(intersectionSetOfGraphs);
-        containedSetsOrdered.sort(Comparator.comparingInt((IntersectionSet o) -> o.size()));
+        containedSetsOrdered.sort(Comparator.comparingInt(IntersectionSet::size));
 
         IntersectionSetCounter intersectionSetCounter = new IntersectionSetCounter(containedSetsOrdered, mapLists);
         return intersectionSetCounter.getNonOverlappingCopiesOfSet(intersectionSetOfGraphs);
