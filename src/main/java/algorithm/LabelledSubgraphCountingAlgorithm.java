@@ -28,6 +28,9 @@ public class LabelledSubgraphCountingAlgorithm {
     }
 
     public int run() {
+        if (host.order() < pattern.order()) {
+            throw new IllegalArgumentException("host graph smaller than pattern - abort");
+        }
         if (pattern.order() == 1) {
             return host.order();
         }

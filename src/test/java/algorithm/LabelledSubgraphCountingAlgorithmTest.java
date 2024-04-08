@@ -140,6 +140,6 @@ class LabelledSubgraphCountingAlgorithmTest {
         vertices.get(4).addNeighbour(vertices.get(5));
         vertices.get(5).addNeighbour(vertices.get(4));
 
-       return new Graph(vertices);
+        return new Graph(vertices);
     }
 }

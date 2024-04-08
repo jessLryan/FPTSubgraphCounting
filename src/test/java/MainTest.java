@@ -17,47 +17,33 @@ import java.util.stream.IntStream;
 
 public class MainTest {
 
-
     final String resourcesDirectoryPath = "src/test/resources";
 
     @Test
     public void TestRandomHostGraphsPatternGraphsOrder1() {
-        int successful = 0;
         int unsuccessful = 0;
 
         for (int i = 1; i < 8; i++) {
-            List<Graph> hostGraphs = createRandomHostGraphs(i, 20, 30);
+            List<Graph> hostGraphs = createRandomHostGraphs(i, 20, 3000);
             ArrayList<Graph> patterns = createAllPatternGraphsWithOrder(i);
             for (Graph host : hostGraphs) {
                 for (Graph pattern : patterns) {
                     ParameterValueOptimiser parameterOptimiser = new ParameterValueOptimiser(pattern, host);
                     int numHighDegVertices = parameterOptimiser.getNumHighDegVertices();
-                    //int numHighDegVertices = 0;
                     List<Vertex> highestDegVertices = host.getHighestDegVertices(numHighDegVertices);
                     LabelledSubgraphCountingAlgorithm FPTAlg = new LabelledSubgraphCountingAlgorithm(host, pattern, highestDegVertices);
                     int FPTCount = FPTAlg.run();
 
                     VertexLists mapLists = new VertexLists(host, pattern);
                     int bruteForceCount = BruteForceLabelledSubgraphCountingAlgorithm.countLabelledCopiesWithLists(pattern, mapLists);
-                    if (bruteForceCount == FPTCount) {
-                        successful++;
-                    } else {
-                        System.out.println("FAILURE");
-                        System.out.println("host");
-                        System.out.println(host);
-                        System.out.println();
-                        System.out.println("pattern");
-                        System.out.println(pattern);
-                        System.out.println("FPT " + FPTCount);
-                        System.out.println("BF " + bruteForceCount);
+                    if (bruteForceCount != FPTCount) {
                         unsuccessful++;
                     }
                 }
             }
 
         }
-        System.out.println("successes: " + successful);
-        System.out.println("failures: " + unsuccessful);
+        assert unsuccessful == 0;
     }
 
     private Graph createSnake() {

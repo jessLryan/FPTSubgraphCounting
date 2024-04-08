@@ -17,6 +17,7 @@ public class AlgorithmRunner {
                     long endTime = System.currentTimeMillis();
                     result.setStatus(RunStatus.INTERRUPTED);
                     result.setRuntimeInMilliseconds(endTime - startTime);
+                    System.out.println(result);
                 })
         );
 
