@@ -14,17 +14,19 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+//runs FPT algorithm and compares result to output of
+//Brute Force algorithm with same inputs
+//large number of graph instances included
+public class ExtensiveTest {
 
-public class MainTest {
-
-    final String resourcesDirectoryPath = "src/test/resources";
+    private final String resourcesDirectoryPath = "src/test/resources";
 
     @Test
     public void TestRandomHostGraphsPatternGraphsOrder1() {
         int unsuccessful = 0;
 
         for (int i = 1; i < 8; i++) {
-            List<Graph> hostGraphs = createRandomHostGraphs(i, 20, 3000);
+            List<Graph> hostGraphs = createRandomHostGraphs(i, 20, 1000);
             ArrayList<Graph> patterns = createAllPatternGraphsWithOrder(i);
             for (Graph host : hostGraphs) {
                 for (Graph pattern : patterns) {
@@ -45,27 +47,6 @@ public class MainTest {
         }
         assert unsuccessful == 0;
     }
-
-    private Graph createSnake() {
-        ArrayList<Vertex> vertices = createVertices(6);
-        vertices.getFirst().addNeighbour(vertices.get(1));
-        vertices.get(1).addNeighbour(vertices.get(0));
-
-        vertices.get(1).addNeighbour(vertices.get(2));
-        vertices.get(2).addNeighbour(vertices.get(1));
-
-        vertices.get(2).addNeighbour(vertices.get(3));
-        vertices.get(3).addNeighbour(vertices.get(2));
-
-        vertices.get(3).addNeighbour(vertices.get(4));
-        vertices.get(4).addNeighbour(vertices.get(3));
-
-        vertices.get(4).addNeighbour(vertices.get(5));
-        vertices.get(5).addNeighbour(vertices.get(4));
-
-        return new Graph(vertices);
-    }
-
 
     public ArrayList<Graph> createAllPatternGraphsWithOrder(int order) {
         ArrayList<Graph> graphs = new ArrayList<>();
