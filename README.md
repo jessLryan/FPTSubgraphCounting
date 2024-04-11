@@ -23,7 +23,7 @@ For example, the complete graph $K_4$ would be written as
 ### Output
 The result is printed to the screen and contains the following information:
 
-- **Date:** the date on which the code was run in the format year-month-day
+- **Datetime:** the date/time on which the code was run
 - **Graph Statistics**: includes the following properties of each of the host and the pattern graph:
     - **filepath**: the absolute filepath of the input file
     - **graph type**: either HOST or PATTERN
