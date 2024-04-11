@@ -63,18 +63,18 @@ class IntersectionGraphTest {
 
     @Test
     void testHashCodeSameObject() {
-        assert SMALLER_GRAPH.hashCode() == SMALLER_GRAPH.hashCode();
+        assertEquals(SMALLER_GRAPH.hashCode(), SMALLER_GRAPH.hashCode());
     }
 
     @Test
     void testHashCodeIdenticalGraph() {
         IntersectionGraph smallerGraphCopy = createSmallerGraph();
-        assert SMALLER_GRAPH.hashCode() == smallerGraphCopy.hashCode();
+        assertEquals(SMALLER_GRAPH.hashCode(), smallerGraphCopy.hashCode());
     }
 
     @Test
     void testHashCodeDifferentSizedGraphs() {
-        assert !(LARGER_GRAPH.hashCode() == SMALLER_GRAPH.hashCode());
+        assertNotEquals(LARGER_GRAPH.hashCode(), SMALLER_GRAPH.hashCode());
     }
 
     private IntersectionGraph createSmallerGraph() {

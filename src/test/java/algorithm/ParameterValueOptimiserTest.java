@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import static org.junit.Assert.assertEquals;
+
 class ParameterValueOptimiserTest {
 
     private final Graph HOST_GRAPH_1 = createFirstHostGraph();
@@ -20,8 +22,8 @@ class ParameterValueOptimiserTest {
         ParameterValueOptimiser parameterValueOptimiser = new ParameterValueOptimiser(PATTERN_SINGLETON, HOST_GRAPH_1);
         int numHighDeg = parameterValueOptimiser.getNumHighDegVertices();
         int maxDegRemaining = parameterValueOptimiser.getMaxDegRemainingVertices();
-        assert numHighDeg == 1;
-        assert maxDegRemaining == 3;
+        assertEquals(1, numHighDeg);
+        assertEquals(3, maxDegRemaining);
     }
 
     @Test
@@ -29,8 +31,8 @@ class ParameterValueOptimiserTest {
         ParameterValueOptimiser parameterValueOptimiser = new ParameterValueOptimiser(PATTERN_TRIANGLE, HOST_GRAPH_1);
         int numHighDeg = parameterValueOptimiser.getNumHighDegVertices();
         int maxDegRemaining = parameterValueOptimiser.getMaxDegRemainingVertices();
-        assert numHighDeg == 0;
-        assert maxDegRemaining == 4;
+        assertEquals(0, numHighDeg);
+        assertEquals(4, maxDegRemaining);
     }
 
     @Test
@@ -38,8 +40,8 @@ class ParameterValueOptimiserTest {
         ParameterValueOptimiser parameterValueOptimiser = new ParameterValueOptimiser(PATTERN_SINGLETON, HOST_GRAPH_2);
         int numHighDeg = parameterValueOptimiser.getNumHighDegVertices();
         int maxDegRemaining = parameterValueOptimiser.getMaxDegRemainingVertices();
-        assert numHighDeg == 1;
-        assert maxDegRemaining == 2;
+        assertEquals(1, numHighDeg);
+        assertEquals(2, maxDegRemaining);
     }
 
     @Test
@@ -48,8 +50,8 @@ class ParameterValueOptimiserTest {
         int numHighDeg = parameterValueOptimiser.getNumHighDegVertices();
         int maxDegRemaining = parameterValueOptimiser.getMaxDegRemainingVertices();
 
-        assert numHighDeg == 0;
-        assert maxDegRemaining == 3;
+        assertEquals(0, numHighDeg);
+        assertEquals(3, maxDegRemaining);
     }
 
     private Graph createSingleton() {

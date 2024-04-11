@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 
 class BruteForceLabelledSubgraphCountingAlgorithmTest {
 
@@ -19,14 +21,14 @@ class BruteForceLabelledSubgraphCountingAlgorithmTest {
     void testPatternTriangleHostGraph1() {
         VertexLists vertexLists = new VertexLists(HOST_GRAPH_1, PATTERN_TRIANGLE);
         int count = BruteForceLabelledSubgraphCountingAlgorithm.countLabelledCopiesWithLists(PATTERN_TRIANGLE, vertexLists);
-        assert count == 6;
+        assertEquals(6, count);
     }
 
     @Test
     void testPatternTriangleHostGraph2() {
         VertexLists vertexLists = new VertexLists(HOST_GRAPH_2, PATTERN_TRIANGLE);
         int count = BruteForceLabelledSubgraphCountingAlgorithm.countLabelledCopiesWithLists(PATTERN_TRIANGLE, vertexLists);
-        assert count == 12;
+        assertEquals(12, count);
     }
 
     private Graph createTriangleGraph() {

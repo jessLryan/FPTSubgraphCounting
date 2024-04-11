@@ -12,6 +12,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static org.junit.Assert.assertEquals;
+
 class IntersectionGraphMergerTest {
     private final List<Vertex> CORRESPONDENCE_VERTICES = createVertices(7);
     private final IntersectionGraph SINGLETON = createSingleton();
@@ -22,27 +24,27 @@ class IntersectionGraphMergerTest {
     @Test
     void testMergeSingletonAndSingleEdge() {
         IntersectionGraphMerger graphMerger = new IntersectionGraphMerger(SINGLE_EDGE, SINGLETON);
-        assert graphMerger.getGraph1().order() == 1;
-        assert graphMerger.getGraph2().order() == 2;
+        assertEquals(1, graphMerger.getGraph1().order());
+        assertEquals(2, graphMerger.getGraph2().order());
 
         List<IntersectionGraph> mergedGraphs = graphMerger.createMergedGraphs();
-        assert mergedGraphs.size() == 2;
+        assertEquals(2, mergedGraphs.size());
 
         for (IntersectionGraph mergedGraph : mergedGraphs) {
-            assert mergedGraph.order() == 2;
+            assertEquals(2, mergedGraph.order());
 
             Vertex firstVertex = mergedGraph.getVertices().getFirst();
-            assert firstVertex.degree() == 1;
+            assertEquals(1, firstVertex.degree());
 
             Vertex secondVertex = mergedGraph.getVertices().getLast();
-            assert secondVertex.degree() == 1;
+            assertEquals(1, secondVertex.degree());
 
             HashSet<Vertex> correspondenceVertices = new HashSet<>();
             correspondenceVertices.addAll(mergedGraph.vertexCorrespondence(firstVertex));
             correspondenceVertices.addAll(mergedGraph.vertexCorrespondence(secondVertex));
 
             Set<Vertex> allCorrespondencePresent = IntStream.range(0, 5).mapToObj(CORRESPONDENCE_VERTICES::get).collect(Collectors.toSet());
-            assert correspondenceVertices.equals(allCorrespondencePresent);
+            assertEquals(allCorrespondencePresent, correspondenceVertices);
         }
     }
 
@@ -50,14 +52,14 @@ class IntersectionGraphMergerTest {
     void testMergeTriangleAndK4() {
         IntersectionGraphMerger graphMerger = new IntersectionGraphMerger(DIAMOND_GRAPH, TRIANGLE_GRAPH);
         List<IntersectionGraph> mergedGraphs = graphMerger.createMergedGraphs();
-        assert mergedGraphs.size() == 72;
+        assertEquals(72, mergedGraphs.size());
 
         for (IntersectionGraph mergedGraph : mergedGraphs) {
             HashSet<Vertex> correspondenceVertices = new HashSet<>();
             for (Vertex vertex : mergedGraph.getVertices()) {
                 correspondenceVertices.addAll(mergedGraph.vertexCorrespondence(vertex));
             }
-            assert correspondenceVertices.equals(new HashSet<>(CORRESPONDENCE_VERTICES));
+            assertEquals(new HashSet<>(CORRESPONDENCE_VERTICES), correspondenceVertices);
         }
     }
 

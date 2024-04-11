@@ -14,6 +14,8 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+import static org.junit.Assert.assertEquals;
+
 //runs FPT algorithm and compares result to output of
 //Brute Force algorithm with same inputs
 //large number of graph instances included
@@ -45,7 +47,7 @@ public class ExtensiveTest {
             }
 
         }
-        assert unsuccessful == 0;
+        assertEquals(0, unsuccessful);
     }
 
     public ArrayList<Graph> createAllPatternGraphsWithOrder(int order) {

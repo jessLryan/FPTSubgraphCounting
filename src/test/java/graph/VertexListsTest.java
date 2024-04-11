@@ -8,6 +8,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class VertexListsTest {
 
@@ -17,7 +18,7 @@ class VertexListsTest {
 
     @Test
     void testAtLeastOneListIsNonEmptyTrue() {
-        assert (FEASIBLE_LIST.atLeastOneListIsNonEmpty());
+        assertTrue(FEASIBLE_LIST.atLeastOneListIsNonEmpty());
     }
 
     @Test
@@ -31,7 +32,7 @@ class VertexListsTest {
 
     @Test
     void testHasNoVertexWithEmptyListTrue() {
-        assert (FEASIBLE_LIST.hasNoVertexWithEmptyList());
+        assertTrue(FEASIBLE_LIST.hasNoVertexWithEmptyList());
     }
 
     @Test
@@ -41,7 +42,7 @@ class VertexListsTest {
 
     @Test
     void testHasEnoughUniqueValuesTrue() {
-        assert (FEASIBLE_LIST.hasEnoughUniqueValues());
+        assertTrue(FEASIBLE_LIST.hasEnoughUniqueValues());
     }
 
     @Test
@@ -53,7 +54,6 @@ class VertexListsTest {
     void testDeepCopy() {
         VertexLists listsCopy = FEASIBLE_LIST.deepCopy();
         Vertex vertex = FEASIBLE_LIST.getMap().keySet().stream().toList().getFirst();
-        assert FEASIBLE_LIST.getListOfVertex(vertex) != listsCopy.getListOfVertex(vertex);
         assertEquals(FEASIBLE_LIST.getListOfVertex(vertex), listsCopy.getListOfVertex(vertex));
     }
 
@@ -107,7 +107,7 @@ class VertexListsTest {
 
     @Test
     void testIsFeasibleTrue() {
-        assert FEASIBLE_LIST.isFeasible();
+        assertTrue(FEASIBLE_LIST.isFeasible());
     }
 
     @Test

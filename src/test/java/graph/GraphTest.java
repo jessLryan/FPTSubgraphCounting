@@ -6,59 +6,62 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 class GraphTest {
 
     private final Graph graph = createGraph();
 
     @Test
     void testOrder() {
-        assert graph.order() == 6;
+        assertEquals(6, graph.order());
     }
 
     @Test
     void testEdgeCount() {
-        assert graph.edgeCount() == 5;
+        assertEquals(5, graph.edgeCount());
     }
 
     @Test
     void testMaxDeg() {
-        assert graph.maxDeg() == 3;
+        assertEquals(3, graph.maxDeg());
     }
 
     @Test
     void testGetHighestDegVertex() {
         List<Vertex> highestDegVertices = graph.getHighestDegVertices(1);
-        assert highestDegVertices.size() == 1;
-        assert highestDegVertices.getFirst().degree() == 3;
+        assertEquals(1, highestDegVertices.size());
+        assertEquals(3, highestDegVertices.getFirst().degree());
     }
 
     @Test
     void testGetTwoHighestDegVertices() {
         List<Vertex> highestDegVertices = graph.getHighestDegVertices(2);
-        assert highestDegVertices.size() == 2;
-        assert highestDegVertices.getFirst().degree() == 3;
-        assert highestDegVertices.getLast().degree() == 2;
+        assertEquals(2, highestDegVertices.size());
+        assertEquals(3, highestDegVertices.getFirst().degree());
+        assertEquals(2, highestDegVertices.getLast().degree());
     }
 
     @Test
     void testMaxDegRemainingRemoveNoVertices() {
-        assert graph.maxDegRemaining(0) == 3;
+        assertEquals(3, graph.maxDegRemaining(0));
     }
 
     @Test
     void testMaxDegRemainingRemoveOneVertex() {
-        assert graph.maxDegRemaining(1) == 1;
+        assertEquals(1, graph.maxDegRemaining(1));
     }
 
     @Test
     void testVertexOrdering() {
         List<Vertex> vertices = graph.vertices;
-        assert vertices.getFirst().degree() == 3;
-        assert vertices.get(1).degree() == 2;
-        assert vertices.get(2).degree() == 2;
-        assert vertices.get(3).degree() == 1;
-        assert vertices.get(4).degree() == 1;
-        assert vertices.getLast().degree() == 1;
+        assertEquals(3, vertices.getFirst().degree());
+        assertEquals(2, vertices.get(1).degree());
+        assertEquals(2, vertices.get(2).degree());
+        assertEquals(1, vertices.get(3).degree());
+        assertEquals(1, vertices.get(4).degree());
+        assertEquals(1, vertices.getLast().degree());
     }
 
     @Test
@@ -75,34 +78,34 @@ class GraphTest {
                     neighbourPrecedingInList = possibleNeighbour;
                 }
             }
-            assert neighbourPrecedingInList != null;
+            assertNotNull(neighbourPrecedingInList);
         }
     }
 
     @Test
     void testGetConnectedComponentsAllVerticesPresent() {
         List<IntersectionGraph> components = graph.getConnectedComponentsWithoutVertices(List.of());
-        assert components.size() == 2;
+        assertEquals(2, components.size());
 
         int totalVertices = components.getFirst().order() + components.getLast().order();
-        assert totalVertices == 6;
+        assertEquals(6, totalVertices);
 
         int maxDeg = Math.max(components.getFirst().maxDeg(), components.getLast().maxDeg());
-        assert maxDeg == 3;
+        assertEquals(3, maxDeg);
     }
 
     @Test
     void testGetConnectedComponentsWithoutHighestDegreeVertex() {
         List<Vertex> verticesToRemove = List.of(graph.vertices.getFirst());
         List<IntersectionGraph> components = graph.getConnectedComponentsWithoutVertices(verticesToRemove);
-        assert components.size() == 3;
+        assertEquals(3, components.size());
 
         int totalVertices = components.getFirst().order() + components.get(1).order() + components.getLast().order();
-        assert totalVertices == 5;
+        assertEquals(5, totalVertices);
 
         int maxDeg = Math.max(components.getFirst().maxDeg(), components.getLast().maxDeg());
         maxDeg = Math.max(maxDeg, components.get(1).maxDeg());
-        assert maxDeg == 1;
+        assertEquals(1, maxDeg);
     }
 
 

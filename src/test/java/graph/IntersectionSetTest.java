@@ -100,7 +100,7 @@ class IntersectionSetTest {
         graphs.add(LARGER_GRAPH);
         IntersectionSet intersectionSet = new IntersectionSet(graphs);
 
-        assert intersectionSet.hashCode() == intersectionSet.hashCode();
+        assertEquals(intersectionSet.hashCode(), intersectionSet.hashCode());
     }
 
     @Test
@@ -115,7 +115,7 @@ class IntersectionSetTest {
         graphs2.add(LARGER_GRAPH);
         IntersectionSet intersectionSet2 = new IntersectionSet(graphs2);
 
-        assert intersectionSet1.hashCode() == intersectionSet2.hashCode();
+        assertEquals(intersectionSet1.hashCode(), intersectionSet2.hashCode());
     }
 
     @Test
@@ -124,13 +124,12 @@ class IntersectionSetTest {
         graphs1.add(LARGER_GRAPH);
         graphs1.add(LARGER_GRAPH);
         IntersectionSet intersectionSet1 = new IntersectionSet(graphs1);
-
         ArrayList<IntersectionGraph> graphs2 = new ArrayList<>();
         graphs2.add(SMALLER_GRAPH);
         graphs2.add(SMALLER_GRAPH);
         IntersectionSet intersectionSet2 = new IntersectionSet(graphs2);
 
-        assert intersectionSet1.hashCode() != intersectionSet2.hashCode();
+        assertNotEquals(intersectionSet1.hashCode(), intersectionSet2.hashCode());
     }
 
     private IntersectionGraph createSmallerGraph() {
