@@ -24,8 +24,8 @@ class IntersectionGraphMergerTest {
     @Test
     void testMergeSingletonAndSingleEdge() {
         IntersectionGraphMerger graphMerger = new IntersectionGraphMerger(SINGLE_EDGE, SINGLETON);
-        assertEquals(1, graphMerger.getGraph1().order());
-        assertEquals(2, graphMerger.getGraph2().order());
+        assertEquals(1, graphMerger.graph1().order());
+        assertEquals(2, graphMerger.graph2().order());
 
         List<IntersectionGraph> mergedGraphs = graphMerger.createMergedGraphs();
         assertEquals(2, mergedGraphs.size());

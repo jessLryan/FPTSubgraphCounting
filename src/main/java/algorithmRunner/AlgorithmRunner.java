@@ -16,13 +16,15 @@ public class AlgorithmRunner {
                 new Thread(() -> {
                     long endTime = System.currentTimeMillis();
                     result.setStatus(RunStatus.INTERRUPTED);
-                    result.setRuntimeInMilliseconds(endTime - startTime);
+                    result.setTotalRuntimeInMilliseconds(endTime - startTime);
                     System.out.println(result);
                 })
         );
 
-        ParameterValueOptimiser parameterValueOptimiser = new ParameterValueOptimiser(hostGraph, patternGraph);
+        ParameterValueOptimiser parameterValueOptimiser = new ParameterValueOptimiser(patternGraph, hostGraph);
         int numHighDegVertices = parameterValueOptimiser.getNumHighDegVertices();
+        long timeAfterParameterOptimisation = System.currentTimeMillis();
+        result.setParameterOptimisationRuntimeInMilliseconds(timeAfterParameterOptimisation - startTime);
         result.setNumberOfHighDegreeVertices(numHighDegVertices);
         result.setMaximumDegreeOfRemainingVertices(parameterValueOptimiser.getMaxDegRemainingVertices());
 
@@ -32,7 +34,8 @@ public class AlgorithmRunner {
         result.setCount(count);
 
         long endTime = System.currentTimeMillis();
-        result.setRuntimeInMilliseconds(endTime - startTime);
+        result.setAlgorithmRuntimeInMilliseconds(endTime - timeAfterParameterOptimisation);
+        result.setTotalRuntimeInMilliseconds(endTime - startTime);
 
         if (count > 0) {
             result.setStatus(RunStatus.PASS);

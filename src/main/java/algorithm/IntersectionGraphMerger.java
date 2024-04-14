@@ -9,10 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-public class IntersectionGraphMerger {
-
-    private final IntersectionGraph graph1;
-    private final IntersectionGraph graph2;
+public record IntersectionGraphMerger(IntersectionGraph graph1, IntersectionGraph graph2) {
 
     public IntersectionGraphMerger(IntersectionGraph graph1, IntersectionGraph graph2) {
         //graph1 should have least vertices for efficiency
@@ -23,14 +20,6 @@ public class IntersectionGraphMerger {
             this.graph1 = graph2;
             this.graph2 = graph1;
         }
-    }
-
-    public IntersectionGraph getGraph1() {
-        return graph1;
-    }
-
-    public IntersectionGraph getGraph2() {
-        return graph2;
     }
 
     //a merged graph of graph1 and graph2 contains (a copy of)

@@ -10,10 +10,6 @@ public class Vertex {
         this.neighbours = new ArrayList<>();
     }
 
-    public Vertex(ArrayList<Vertex> neighbours) {
-        this.neighbours = neighbours;
-    }
-
     public void addNeighbour(Vertex neighbour) {
         if (!neighbours.contains(neighbour)) {
             neighbours.add(neighbour);

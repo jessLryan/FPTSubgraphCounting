@@ -11,10 +11,12 @@ public class RunResult {
     private final GraphStatistics patternGraphStatistics;
     private final GraphStatistics hostGraphStatistics;
     private Integer numberOfHighDegreeVertices = null;
-    private Integer maximumDegreeOfRemainingVertices = null;
+    private Integer maximumDegreeOfRemainingVertices;
     private RunStatus status;
-    private Integer count = null;
-    private long runtimeInMilliseconds;
+    private Integer count;
+    private Long parameterOptimisationRuntime;
+    private Long algorithmRuntime;
+    private Long totalRuntime;
 
     public RunResult(Graph hostGraph,
                      String hostGraphFilepath,
@@ -35,7 +37,9 @@ public class RunResult {
                 "maximum degree of remaining host graph: " + maximumDegreeOfRemainingVertices + "\n" +
                 "run status: " + status + "\n" +
                 "count: " + count + "\n" +
-                "runtime in milliseconds: " + runtimeInMilliseconds;
+                "parameter optimisation runtime in milliseconds: " + parameterOptimisationRuntime + "\n" +
+                "algorithm runtime in milliseconds: : " + algorithmRuntime + "\n" +
+                "total runtime in milliseconds: " + totalRuntime;
     }
 
     public void setMaximumDegreeOfRemainingVertices(int maximumDegreeOfRemainingVertices) {
@@ -50,8 +54,16 @@ public class RunResult {
         this.count = count;
     }
 
-    public void setRuntimeInMilliseconds(long runtimeInMilliseconds) {
-        this.runtimeInMilliseconds = runtimeInMilliseconds;
+    public void setTotalRuntimeInMilliseconds(long runtimeInMilliseconds) {
+        this.totalRuntime = runtimeInMilliseconds;
+    }
+
+    public void setAlgorithmRuntimeInMilliseconds(long runtimeInMilliseconds) {
+        this.algorithmRuntime = runtimeInMilliseconds;
+    }
+
+    public void setParameterOptimisationRuntimeInMilliseconds(long runtimeInMilliseconds) {
+        this.parameterOptimisationRuntime = runtimeInMilliseconds;
     }
 
     public void setStatus(RunStatus runStatus) {
