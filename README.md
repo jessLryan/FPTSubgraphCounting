@@ -31,11 +31,13 @@ The result is printed to the screen and contains the following information:
     - **number of edges**
     - **average degree**
 
-- **Number of high degree vertices**: the value of this parameter is optimised within the code
-- **Maximum degree of remaining vertices**: the maximum degree of the host graph after the 'removal' of the high degree vertices
-- **Run Status**: PASS if the number of copies of the graph is $>0$, FAIL if there are no copies, and INTERRUPTED if the program fails to complete for whatever reason
-- **count** the number of labelled copies of the first graph in the second (null if interrupted)
-- **runtime in milliseconds**
+- **Number of high-degree vertices**: the value of this parameter is optimised within the code
+- **Maximum degree of remaining vertices**: the maximum degree of the host graph after the 'removal' of the high-degree vertices
+- **Run status**: PASS if the number of copies of the graph is $>0$, FAIL if there are no copies, and INTERRUPTED if the program fails to complete for whatever reason
+- **Count** the number of labelled copies of the first graph in the second (null if interrupted)
+- **Total runtime in milliseconds**
+- **Parameter value optimisation runtime in milliseconds** time taken to determine best values of parameters
+- **Algorithm runtime in milliseconds** time for the algorithm to run after the parameter values have been optimised
 
 ## References
 <a id="1">[1]</a>
